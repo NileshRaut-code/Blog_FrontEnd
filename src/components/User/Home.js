@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addProduct, removeProduct } from "../../utils/productSlice.js";
 import Productcart from "./BlogCart.js";
+import Loading from "../Loader comp/Loading.js";
 const Home = () => {
   const dispatch = useDispatch();
   const allproductdata = useSelector((store) => store.products.data);
@@ -13,7 +14,7 @@ const Home = () => {
     if (allproductdata === null) {
       console.log("this is all product data calling");
       axios
-        .get("/api/v1/blog/allpost")
+        .get(`https://blogbackendnilesh.up.railway.app/api/v1/blog/allpost`)
         .then((res) => {
           console.log(res, "thiscaled");
           dispatch(addProduct(res.data));
@@ -31,7 +32,7 @@ const Home = () => {
           // console.log(info);
         })} */}
         {!allproductdata ? (
-          <h1>loafing</h1>
+          <Loading className="bg-black" />
         ) : (
           allproductdata?.data?.map((data) => {
             // console.log(data);

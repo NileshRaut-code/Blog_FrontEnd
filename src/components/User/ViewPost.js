@@ -9,7 +9,7 @@ const ViewPost = () => {
   const [data, setdata] = useState(null);
   useEffect(() => {
     axios
-      .get(`/api/v1/blog/post/${slug}`)
+      .get(`https://blogbackendnilesh.up.railway.app/api/v1/blog/post/${slug}`)
       .then((res) => setdata(res.data.data))
       .catch((err) => navigate("/404"));
   }, []);

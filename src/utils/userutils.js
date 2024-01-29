@@ -4,7 +4,9 @@ import { login, logout } from "./userSlice.js";
 export const Currentuser = async (dispatch) => {
   try {
     console.log("called 1");
-    const res = await axios.get("/api/v1/users/current-user");
+    const res = await axios.get(
+      "https://blogbackendnilesh.up.railway.app/api/v1/users/current-user"
+    );
 
     if (res) {
       console.log(res);
@@ -38,7 +40,7 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
   // console.log("button clicked", body);
 
   axios
-    .post("/api/v1/users/login", body, {
+    .post("https://blogbackendnilesh.up.railway.app/api/v1/users/login", body, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -63,7 +65,7 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
 export const Logoutuser = (dispatch) => {
   console.log("logout kar rahe he");
   axios
-    .post("/api/v1/users/logout")
+    .post("https://blogbackendnilesh.up.railway.app/api/v1/users/logout")
     .then((res) => {
       dispatch(logout());
     })
@@ -73,11 +75,15 @@ export const Logoutuser = (dispatch) => {
 export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
   console.log("called 1");
   axios
-    .post("/api/v1/users/register", body, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    .post(
+      "https://blogbackendnilesh.up.railway.app/api/v1/users/register",
+      body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
     .then((res) => {
       console.log(res);
       dispatch(login(res.data.data));
@@ -92,7 +98,9 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
 export const getPostdata = async (slug) => {
   console.log(slug);
   try {
-    const data = await axios.get(`/api/v1/blog/post/${slug}`);
+    const data = await axios.get(
+      `https://blogbackendnilesh.up.railway.app/api/v1/blog/post/${slug}`
+    );
     console.log(data);
     if (!data) {
       throw new Error("not Existed Post");
@@ -101,7 +109,7 @@ export const getPostdata = async (slug) => {
     console.log(error.message);
   }
   // axios
-  //   .get(`/api/v1/blog/post/${slug}`)
+  //   .get(`https://blogbackendnilesh.up.railway.app/api/v1/blog/post/${slug}`)
   //   .then((res) => {
   //     return res;
   //   })

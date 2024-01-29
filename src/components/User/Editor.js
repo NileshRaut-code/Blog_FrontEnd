@@ -33,11 +33,15 @@ const Editor = (postdata) => {
     if (postdata.data.new == true) {
       console.log(body);
       axios
-        .post(`/api/v1/blog/addpost`, body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        .post(
+          `https://blogbackendnilesh.up.railway.app/api/v1/blog/addpost`,
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           // console.log(res);
           navigate(`/blog/${res.data.data.slug}`);
@@ -48,13 +52,16 @@ const Editor = (postdata) => {
         });
     }
     if (postdata.data.new == false) {
-      console.log(`/api/v1/blog/post/edit/${pId}`);
       axios
-        .put(`/api/v1/blog/post/edit/${pId}`, body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        .put(
+          `https://blogbackendnilesh.up.railway.app/api/v1/blog/post/edit/${pId}`,
+          body,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((res) => {
           //console.log(res);
           navigate(`/blog/${res.data.data.slug}`);
@@ -68,7 +75,9 @@ const Editor = (postdata) => {
   }
   const handleDelete = (value) => {
     axios
-      .delete(`/api/v1/blog/post/delete/${pId}`)
+      .delete(
+        `https://blogbackendnilesh.up.railway.app/api/v1/blog/post/delete/${pId}`
+      )
       .then((res) => {
         //console.log(res);
         navigate("/");
