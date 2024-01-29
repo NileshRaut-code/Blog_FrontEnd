@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import Header from "./components/constantcomponets/Header.js";
+import Footer from "./components/constantcomponets/Footer.js";
+import { useDispatch, useSelector } from "react-redux";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Loading from "./components/Loader comp/Loading.js";
+import { Currentuser } from "./utils/userutils.js";
+// creating this useeffect so that we can easily logged through whole app if we looged and set cookies
+//backend set upcookieds
+
+const App = () => {
+  const [loader, setloader] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userdata = useSelector((store) => store.user.data);
+  useEffect(() => {
+    if (userdata == null) {
+      console.log("called");
+      // aync call so it called first ... no error
+      Currentuser(dispatch).then((res) => setloader(res));
+    } else {
+      console.log("data present not called");
+      setloader(true);
+    }
+  }, [dispatch, navigate]);
+
+  return loader ? (
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  ) : (
+    <Loading />
+  ); //add loader components ... so it check make request to check logged on every page...
+};
 
 export default App;
