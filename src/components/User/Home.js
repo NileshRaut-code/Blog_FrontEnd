@@ -9,18 +9,18 @@ const Home = () => {
   const dispatch = useDispatch();
   const allproductdata = useSelector((store) => store.products.data);
 
-  //console.log(allproductdata);
+  ////console.log(allproductdata);
   useEffect(() => {
     if (allproductdata === null) {
-      console.log("this is all product data calling");
+      //console.log("this is all product data calling");
       axios
-        .get(`https://blogbackendnilesh.up.railway.app/api/v1/blog/allpost`)
+        .get(`/api/v1/blog/allpost`)
         .then((res) => {
-          console.log(res, "thiscaled");
+          //console.log(res, "thiscaled");
           dispatch(addProduct(res.data));
-          console.log(allproductdata);
-        }) //console.log(res))
-        .catch((err) => dispatch(removeProduct())); //console.log(err));
+          //console.log(allproductdata);
+        }) ////console.log(res))
+        .catch((err) => dispatch(removeProduct())); ////console.log(err));
     }
   }, [allproductdata, dispatch]);
 
@@ -29,13 +29,13 @@ const Home = () => {
       <div className="bg-gradient-to-r flex-wrap flex-col md:flex-row from-gray-800 via-gray-900 to-black text-white min-h-screen flex items-center justify-center ">
         {/* {allproductdata.data.map((inf) => {
           <Productcart info />;
-          // console.log(info);
+          // //console.log(info);
         })} */}
         {!allproductdata ? (
-          <Loading className="bg-black" />
+          <Loading />
         ) : (
           allproductdata?.data?.map((data) => {
-            // console.log(data);
+            // //console.log(data);
             return <Productcart key={data._id} data={data} />;
           })
         )}

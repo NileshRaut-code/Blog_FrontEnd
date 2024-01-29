@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const data = useSelector((store) => store.user.data);
-  console.log(data);
+  //console.log(data);
   return (
     <>
       <div className="relative">

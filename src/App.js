@@ -16,11 +16,11 @@ const App = () => {
   const userdata = useSelector((store) => store.user.data);
   useEffect(() => {
     if (userdata == null) {
-      console.log("called");
+      //console.log("called");
       // aync call so it called first ... no error
       Currentuser(dispatch).then((res) => setloader(res));
     } else {
-      console.log("data present not called");
+      //console.log("data present not called");
       setloader(true);
     }
   }, [dispatch, navigate]);

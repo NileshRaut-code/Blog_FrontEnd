@@ -22,7 +22,7 @@ export const EditPost = () => {
 
     fetchData();
   }, [slug]);
-  console.log(postdata?.data?.data?._id);
+  //console.log(postdata?.data?.data?._id);
   const data = {
     title: postdata?.data?.data?.title,
     slug: postdata?.data?.data?.slug,

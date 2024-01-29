@@ -4,9 +4,9 @@ import { login, logout } from "./userSlice.js";
 export const Currentuser = async (dispatch) => {
   try {
     console.log("called 1");
-    const res = await axios.get(
-      "https://blogbackendnilesh.up.railway.app/api/v1/users/current-user"
-    );
+    const res = await axios.get("/api/v1/users/current-user", {
+      withCredentials: true,
+    });
 
     if (res) {
       console.log(res);
@@ -40,10 +40,12 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
   // console.log("button clicked", body);
 
   axios
-    .post("https://blogbackendnilesh.up.railway.app/api/v1/users/login", body, {
+    .post("/api/v1/users/login", body, {
       headers: {
         "Content-Type": "application/json",
+        // Host: "http://localhost:3000",
       },
+      withCredentials: true,
     })
     .then((res) => {
       console.log(res);
@@ -65,7 +67,7 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
 export const Logoutuser = (dispatch) => {
   console.log("logout kar rahe he");
   axios
-    .post("https://blogbackendnilesh.up.railway.app/api/v1/users/logout")
+    .post("/api/v1/users/logout")
     .then((res) => {
       dispatch(logout());
     })
@@ -75,15 +77,11 @@ export const Logoutuser = (dispatch) => {
 export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
   console.log("called 1");
   axios
-    .post(
-      "https://blogbackendnilesh.up.railway.app/api/v1/users/register",
-      body,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    .post("/api/v1/users/register", body, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
     .then((res) => {
       console.log(res);
       dispatch(login(res.data.data));
@@ -98,9 +96,7 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
 export const getPostdata = async (slug) => {
   console.log(slug);
   try {
-    const data = await axios.get(
-      `https://blogbackendnilesh.up.railway.app/api/v1/blog/post/${slug}`
-    );
+    const data = await axios.get(`/api/v1/blog/post/${slug}`);
     console.log(data);
     if (!data) {
       throw new Error("not Existed Post");

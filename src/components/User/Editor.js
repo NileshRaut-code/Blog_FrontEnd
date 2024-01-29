@@ -31,7 +31,7 @@ const Editor = (postdata) => {
     };
     const body = JSON.stringify(data);
     if (postdata.data.new == true) {
-      console.log(body);
+      //console.log(body);
       axios
         .post(
           `https://blogbackendnilesh.up.railway.app/api/v1/blog/addpost`,
@@ -43,11 +43,11 @@ const Editor = (postdata) => {
           }
         )
         .then((res) => {
-          // console.log(res);
+          // //console.log(res);
           navigate(`/blog/${res.data.data.slug}`);
         })
         .catch((err) => {
-          //console.log(err);
+          ////console.log(err);
           navigate("/404");
         });
     }
@@ -63,11 +63,11 @@ const Editor = (postdata) => {
           }
         )
         .then((res) => {
-          //console.log(res);
+          ////console.log(res);
           navigate(`/blog/${res.data.data.slug}`);
         })
         .catch((err) => {
-          //console.log(err);
+          ////console.log(err);
           //navigate("/404");
           seterr("You Have No Rights to Update Post ");
         });
@@ -79,17 +79,17 @@ const Editor = (postdata) => {
         `https://blogbackendnilesh.up.railway.app/api/v1/blog/post/delete/${pId}`
       )
       .then((res) => {
-        //console.log(res);
+        ////console.log(res);
         navigate("/");
       })
       .catch((err) => {
-        //console.log(err);
+        ////console.log(err);
         //navigate("/404");
         seterr("You Have No Rights to Delete Post ");
       });
   };
   const handleContentChange = (value) => {
-    console.log(value);
+    //console.log(value);
   };
 
   const generateSlug = (title) => {
