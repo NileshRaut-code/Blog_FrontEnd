@@ -8,13 +8,14 @@ import Loading from "../Loader comp/Loading.js";
 const Home = () => {
   const dispatch = useDispatch();
   const allproductdata = useSelector((store) => store.products.data);
+  const REACT_APP_API_URI = process.env.REACT_APP_API_URI;
 
   ////console.log(allproductdata);
   useEffect(() => {
     if (allproductdata === null) {
       //console.log("this is all product data calling");
       axios
-        .get(`/api/v1/blog/allpost`)
+        .get(`${REACT_APP_API_URI}/api/v1/blog/allpost`)
         .then((res) => {
           //console.log(res, "thiscaled");
           dispatch(addProduct(res.data));

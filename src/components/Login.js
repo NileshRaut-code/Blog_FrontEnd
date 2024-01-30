@@ -50,7 +50,7 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-[67vh]">
+    <div className="flex flex-col bg-gradient-to-r from-gray-800 via-gray-900 to-black min-h-[67vh]">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           {islogin ? "Log in" : "Sign up"} to your account

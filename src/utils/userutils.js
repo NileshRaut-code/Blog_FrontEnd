@@ -1,12 +1,12 @@
 import axios from "axios";
 import { login, logout } from "./userSlice.js";
-
+const REACT_APP_API_URI = process.env.REACT_APP_API_URI;
 export const Currentuser = async (dispatch) => {
   try {
     console.log("called 1");
-    const res = await axios.get("/api/v1/users/current-user", {
-      withCredentials: true,
-    });
+    const res = await axios.get(
+      `${REACT_APP_API_URI}/api/v1/users/current-user`
+    );
 
     if (res) {
       console.log(res);
@@ -40,18 +40,14 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
   // console.log("button clicked", body);
 
   axios
-    .post("/api/v1/users/login", body, {
+    .post(`${REACT_APP_API_URI}/api/v1/users/login`, body, {
       headers: {
         "Content-Type": "application/json",
-        // Host: "http://localhost:3000",
-        // "Access-Control-Allow-Origin": "*",
-        // "Content-Length": "268",
-        // Host: "",
+        Origin: "http://localhost:3000",
       },
-      // mode:{cors},
-      // withCredentials: true,
     })
     .then((res) => {
+      console.log(res.headers.get("set-cookie"));
       console.log(res);
       dispatch(login(res.data.data.user));
       navigate("/");
@@ -71,7 +67,7 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
 export const Logoutuser = (dispatch) => {
   console.log("logout kar rahe he");
   axios
-    .post("/api/v1/users/logout")
+    .post(`${REACT_APP_API_URI}/api/v1/users/logout`, { withCredentials: true })
     .then((res) => {
       dispatch(logout());
     })
@@ -81,7 +77,7 @@ export const Logoutuser = (dispatch) => {
 export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
   console.log("called 1");
   axios
-    .post("/api/v1/users/register", body, {
+    .post(`${REACT_APP_API_URI}/api/v1/users/register`, body, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -100,7 +96,9 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
 export const getPostdata = async (slug) => {
   console.log(slug);
   try {
-    const data = await axios.get(`/api/v1/blog/post/${slug}`);
+    const data = await axios.get(
+      `${REACT_APP_API_URI}/api/v1/blog/post/${slug}`
+    );
     console.log(data);
     if (!data) {
       throw new Error("not Existed Post");

@@ -7,10 +7,14 @@ export const EditPost = () => {
   const { slug } = useParams();
   const [postdata, setPostdata] = useState(null);
   const navigate = useNavigate();
+  const REACT_APP_API_URI = process.env.REACT_APP_API_URI;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postDataResult = await axios.get(`/api/v1/blog/post/${slug}`);
+        const postDataResult = await axios.get(
+          `${REACT_APP_API_URI}/api/v1/blog/post/${slug}`
+        );
         setPostdata(postDataResult);
       } catch (error) {
         console.error("Error fetching post data:", error.response.status);

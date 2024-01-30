@@ -11,6 +11,7 @@ const Editor = (postdata) => {
   const [err, seterr] = useState("");
   const pId = postdata.data.pId;
   const navigate = useNavigate();
+  const REACT_APP_API_URI = process.env.REACT_APP_API_URI;
   useEffect(() => {
     if (postdata) {
       title.current.value = postdata.data.title || "";
@@ -33,7 +34,7 @@ const Editor = (postdata) => {
     if (postdata.data.new === true) {
       //console.log(body);
       axios
-        .post(`/api/v1/blog/addpost`, body, {
+        .post(`${REACT_APP_API_URI}/api/v1/blog/addpost`, body, {
           headers: {
             "Content-Type": "application/json",
           },
@@ -97,13 +98,13 @@ const Editor = (postdata) => {
   };
 
   return (
-    <div className="container  min-h-screen mx-auto p-4">
+    <div className="container bg-gradient-to-r from-gray-800 via-gray-900 to-black  min-h-screen mx-auto p-4">
       <div className="md:w-1/2 mx-auto">
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="mb-4">
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               Title:
             </label>
@@ -112,13 +113,13 @@ const Editor = (postdata) => {
               type="text"
               ref={title}
               onChange={handleTitleChange}
-              className="mt-1 p-2 w-full border rounded-md"
+              className="mt-1 p-2 w-full border rounded-md bg-slate-400"
             />
           </div>
           <div className="mb-4">
             <label
               htmlFor="slug"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               Slug:
             </label>
@@ -126,14 +127,14 @@ const Editor = (postdata) => {
               id="slug"
               type="text"
               ref={slug}
-              className="mt-1 p-2 w-full border rounded-md"
+              className="mt-1 p-2 w-full border rounded-md bg-slate-400"
               readOnly
             />
           </div>
           <div className="mb-4">
             <label
               htmlFor="content"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-white"
             >
               Content:
             </label>
@@ -141,13 +142,13 @@ const Editor = (postdata) => {
               id="content"
               ref={description}
               onChange={handleContentChange}
-              className="mt-1 p-2 border rounded-md"
+              className="mt-1 p-2 border  bg-slate-500 rounded-md "
             />
           </div>
           <button
             onClick={handleUpdate}
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-md"
+            className="bg-gray-800 hover:bg-blue-900  text-white py-2 px-4 rounded-md"
           >
             {postdata.data.new ? "Submit" : "Update"}
           </button>
@@ -155,7 +156,7 @@ const Editor = (postdata) => {
             <button
               onClick={handleDelete}
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md"
+              className="bg-gray-800 hover:bg-blue-900 mx-2 text-white py-2 px-4 rounded-md"
             >
               DeletePost
             </button>

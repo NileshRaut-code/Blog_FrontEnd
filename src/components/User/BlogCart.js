@@ -16,7 +16,7 @@ const Productcart = (data) => {
         </p>
         <h4 className="font-bold mb-2">
           {data.data.author.username && (
-            <Link to={`/shop/${data?.data?.author?.username}`}>
+            <Link to={`/author/${data?.data?.author?.username}`}>
               Author : {data?.data?.author?.username}
             </Link>
           )}
@@ -24,7 +24,7 @@ const Productcart = (data) => {
 
         <Link
           to={`/blog/${data?.data?.slug}`}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+          className="bg-gray-800 hover:bg-blue-900 text-white px-4 py-2 rounded-md  focus:outline-none focus:ring focus:border-blue-300"
         >
           Read More
         </Link>

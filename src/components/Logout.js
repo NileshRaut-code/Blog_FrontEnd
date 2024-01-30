@@ -12,7 +12,9 @@ const Logout = () => {
     Logoutuser(dispatch);
   }, [dispatch]);
 
-  return <Loading />;
+  return (
+    <Loading className="bg-gradient-to-r from-gray-800 via-gray-900 to-black" />
+  );
 };
 
 export default Logout;
