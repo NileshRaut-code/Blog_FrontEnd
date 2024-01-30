@@ -26,8 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "serve": "serve -s build -l 3000 --ssl-cert server.cert --ssl-key server.key",
-    "start-https": "npm run build && npm run serve"
+    "serve": "serve -s build"
   },
   "eslintConfig": {
     "extends": [
