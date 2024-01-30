@@ -8,7 +8,7 @@ const Dashboard = () => {
     <>
       <div className="relative">
         {/* Cover Image */}
-        <img
+        <image
           src={data?.coverImage}
           alt="Cover Image"
           className="w-full h-96 md:h-80 lg:h-96 xl:h-120 object-cover"

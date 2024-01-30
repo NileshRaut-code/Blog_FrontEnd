@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Loading from "../components/Loader comp/Loading";
 function Auth({ children, aut = true }) {
   const authstate = useSelector((store) => store.user.status);

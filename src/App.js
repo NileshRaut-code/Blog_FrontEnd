@@ -23,7 +23,7 @@ const App = () => {
       //console.log("data present not called");
       setloader(true);
     }
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, userdata]);
 
   return loader ? (
     <>

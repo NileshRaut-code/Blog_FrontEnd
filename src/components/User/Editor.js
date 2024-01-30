@@ -1,4 +1,4 @@
-import React, { use, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect } from "react";
@@ -30,7 +30,7 @@ const Editor = (postdata) => {
       description: description?.current?.value,
     };
     const body = JSON.stringify(data);
-    if (postdata.data.new == true) {
+    if (postdata.data.new === true) {
       //console.log(body);
       axios
         .post(`/api/v1/blog/addpost`, body, {
@@ -47,7 +47,7 @@ const Editor = (postdata) => {
           navigate("/404");
         });
     }
-    if (postdata.data.new == false) {
+    if (postdata.data.new === false) {
       axios
         .put(`/api/v1/blog/post/edit/${pId}`, body, {
           headers: {

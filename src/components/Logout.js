@@ -10,7 +10,7 @@ const Logout = () => {
 
   useEffect(() => {
     Logoutuser(dispatch);
-  }, []);
+  }, [dispatch]);
 
   return <Loading />;
 };

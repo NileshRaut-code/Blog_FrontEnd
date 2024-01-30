@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      this is homeeeee<Link to={"/dashboard"}>go</Link>
+      this is hom eeeee<Link to={"/dashboard"}>go</Link>
       <Outlet />
       <Footer />
     </>

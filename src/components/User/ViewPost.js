@@ -12,7 +12,7 @@ const ViewPost = () => {
       .get(`/api/v1/blog/post/${slug}`)
       .then((res) => setdata(res.data.data))
       .catch((err) => navigate("/404"));
-  }, []);
+  }, [navigate, slug]);
   return data ? (
     <>
       <div className="bg-gray-900 min-h-screen text-white p-6  ">

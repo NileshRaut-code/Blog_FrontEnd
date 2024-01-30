@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Editor from "./Editor.js";
 import Loading from "../Loader comp/Loading.js";
 import axios from "axios";
@@ -19,7 +19,7 @@ export const EditPost = () => {
     };
 
     fetchData();
-  }, [slug]);
+  }, [navigate, slug]);
   //console.log(postdata?.data?.data?._id);
   const data = {
     title: postdata?.data?.data?.title,

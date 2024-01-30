@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+
 import { addProduct, removeProduct } from "../../utils/productSlice.js";
 import Productcart from "./BlogCart.js";
 import Loading from "../Loader comp/Loading.js";
