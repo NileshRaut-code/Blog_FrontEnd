@@ -3,7 +3,7 @@
 
 // export const Currentuser = async (dispatch) => {
 //   try {
-//     const res = await axios.get(`/api/v1/users/current-user`);
+//     const res = await axios.get(`https://blogbackendnilesh.up.railway.app/api/v1/users/current-user`);
 
 //     if (res.data.data) {
 //       //console.log(res.data.data);

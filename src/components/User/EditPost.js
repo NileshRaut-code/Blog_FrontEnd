@@ -10,9 +10,7 @@ export const EditPost = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postDataResult = await axios.get(
-          `https://blogbackendnilesh.up.railway.app/api/v1/blog/post/${slug}`
-        );
+        const postDataResult = await axios.get(`/api/v1/blog/post/${slug}`);
         setPostdata(postDataResult);
       } catch (error) {
         console.error("Error fetching post data:", error.response.status);

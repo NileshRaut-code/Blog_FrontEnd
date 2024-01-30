@@ -2,7 +2,7 @@
   "name": "blog",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://blogbackendnilesh.up.railway.app",
+  "proxy":"https://blogbackendnilesh.up.railway.app/",
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
     "@testing-library/jest-dom": "^5.17.0",
@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.4",
+    "firebase-tools": "^13.1.0",
     "http-proxy-middleware": "^2.0.6",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
@@ -21,11 +22,12 @@
     "tailwindcss": "^3.4.0",
     "web-vitals": "^2.1.4"
   },
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "serve": "serve -s build -l 3000 --ssl-cert server.cert --ssl-key server.key",
+    "start-https": "npm run build && npm run serve"
   },
   "eslintConfig": {
     "extends": [
