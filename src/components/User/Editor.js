@@ -2,16 +2,16 @@ import React, { useRef, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { addPost, deletePost, updatePost } from "../../utils/userutils";
 const Editor = (postdata) => {
+  const navigate = useNavigate();
+
   const title = useRef(null);
   const slug = useRef(null);
   const description = useRef(null);
   const [err, seterr] = useState("");
   const pId = postdata.data.pId;
-  const navigate = useNavigate();
-  const REACT_APP_API_URI = process.env.REACT_APP_API_URI;
   useEffect(() => {
     if (postdata) {
       title.current.value = postdata.data.title || "";
@@ -32,56 +32,17 @@ const Editor = (postdata) => {
     };
     const body = JSON.stringify(data);
     if (postdata.data.new === true) {
-      //console.log(body);
-      axios
-        .post(`${REACT_APP_API_URI}/api/v1/blog/addpost`, body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          // //console.log(res);
-          navigate(`/blog/${res.data.data.slug}`);
-        })
-        .catch((err) => {
-          ////console.log(err);
-          navigate("/404");
-        });
+      //console.log("new Post");
+      addPost(body, seterr, navigate);
     }
     if (postdata.data.new === false) {
-      axios
-        .put(`/api/v1/blog/post/edit/${pId}`, body, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          ////console.log(res);
-          navigate(`/blog/${res.data.data.slug}`);
-        })
-        .catch((err) => {
-          ////console.log(err);
-          //navigate("/404");
-          seterr("You Have No Rights to Update Post ");
-        });
+      console.log("update");
+      updatePost(pId, body, seterr, navigate);
     }
   }
-  const handleDelete = (value) => {
-    axios
-      .delete(`/api/v1/blog/post/delete/${pId}`)
-      .then((res) => {
-        ////console.log(res);
-        navigate("/");
-      })
-      .catch((err) => {
-        ////console.log(err);
-        //navigate("/404");
-        seterr("You Have No Rights to Delete Post ");
-      });
-  };
-  const handleContentChange = (value) => {
-    //console.log(value);
-  };
+  function handleDelete() {
+    deletePost(pId, seterr, navigate);
+  }
 
   const generateSlug = (title) => {
     return title
@@ -141,7 +102,6 @@ const Editor = (postdata) => {
             <ReactQuill
               id="content"
               ref={description}
-              onChange={handleContentChange}
               className="mt-1 p-2 border  bg-slate-500 rounded-md "
             />
           </div>

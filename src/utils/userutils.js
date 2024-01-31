@@ -1,11 +1,18 @@
 import axios from "axios";
 import { login, logout } from "./userSlice.js";
+
 const REACT_APP_API_URI = process.env.REACT_APP_API_URI;
+const accessToken = localStorage.getItem("accessToken");
 export const Currentuser = async (dispatch) => {
   try {
     console.log("called 1");
     const res = await axios.get(
-      `${REACT_APP_API_URI}/api/v1/users/current-user`
+      `${REACT_APP_API_URI}/api/v1/users/current-user`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
     );
 
     if (res) {
@@ -43,18 +50,21 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
     .post(`${REACT_APP_API_URI}/api/v1/users/login`, body, {
       headers: {
         "Content-Type": "application/json",
-        Origin: "http://localhost:3000",
       },
+      withCredentials: true,
     })
     .then((res) => {
-      console.log(res.headers.get("set-cookie"));
-      console.log(res);
+      console.log(res.data.data);
       dispatch(login(res.data.data.user));
+
+      // document.cookie=res.data.data.accessToken
+      localStorage.setItem("accessToken", res.data.data.accessToken);
+
       navigate("/");
     })
     .catch((err) => {
-      console.log(err.response.statusText);
-      let msgdata = err.response.statusText;
+      console.log(err?.response?.statusText);
+      let msgdata = err?.response?.statusText;
       if (msgdata === "Unauthorized") {
         msgdata = "Password is Incorrect";
       } else {
@@ -62,16 +72,6 @@ export const Loginuser = (dispatch, navigate, seterrmsg, email, password) => {
       }
       seterrmsg(msgdata);
     });
-};
-
-export const Logoutuser = (dispatch) => {
-  console.log("logout kar rahe he");
-  axios
-    .post(`${REACT_APP_API_URI}/api/v1/users/logout`, { withCredentials: true })
-    .then((res) => {
-      dispatch(logout());
-    })
-    .catch((err) => console.log(err));
 };
 
 export const Signupuser = (dispatch, navigate, seterrmsg, body) => {
@@ -114,4 +114,76 @@ export const getPostdata = async (slug) => {
   //   .catch((err) => {
   //     return err;
   //   });
+};
+
+export const addPost = async (body, seterr, navigate) => {
+  axios
+    .post(
+      `${REACT_APP_API_URI}/api/v1/blog/addpost`,
+      body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      // //console.log(res);
+      navigate(`/blog/${res.data.data.slug}`);
+      seterr("New Post Added");
+    })
+    .catch((err) => {
+      ////console.log(err);
+      seterr("Error in Addin post");
+    });
+};
+
+export const updatePost = (pId, body, seterr, navigate) => {
+  axios
+    .put(
+      `${REACT_APP_API_URI}/api/v1/blog/post/edit/${pId}`,
+      body,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      ////console.log(res);
+      seterr("post succesfully added");
+      navigate(`/blog/${res.data.data.slug}`);
+    })
+    .catch((err) => {
+      ////console.log(err);
+      //navigate("/404");
+      seterr("You Have No Rights to Update Post ");
+    });
+};
+
+export const deletePost = (pId, seterr, navigate) => {
+  console.log(accessToken);
+  axios
+    .delete(
+      `${REACT_APP_API_URI}/api/v1/blog/post/delete/${pId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
+      { withCredentials: true }
+    )
+    .then((res) => {
+      ////console.log(res);
+      navigate("/");
+    })
+    .catch((err) => {
+      ////console.log(err);
+      //navigate("/404");
+      seterr("You Have No Rights to Delete Post ");
+    });
 };

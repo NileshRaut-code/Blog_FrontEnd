@@ -26,6 +26,7 @@
     
     "build": "react-scripts build",
     "serve": "serve -s build",
+    "s":"set PORT=5000 &&react-scripts start",
     "start": "serve build -s -n -L -p 3000",
     "dev": "react-scripts start",
     "builds": "set \"REACT_APP_PROXY=https://blogbackendnilesh.up.railway.app\" && react-scripts build",
