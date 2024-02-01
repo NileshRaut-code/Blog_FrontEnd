@@ -71,7 +71,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Dashboard />,
+        element: (
+          <Auth aut={true}>
+            <Dashboard />
+          </Auth>
+        ),
       },
       {
         path: "/author/:username",

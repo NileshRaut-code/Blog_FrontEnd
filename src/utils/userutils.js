@@ -77,7 +77,7 @@ const axiosInstance = axios.create({
 export const Logoutuser = (dispatch, navigate) => {
   console.log("logout kar rahe he");
   axiosInstance
-    .post("/api/v1/users/logout")
+    .delete("/api/v1/users/logout")
     .then((res) => {
       console.log(res);
       dispatch(logout());
@@ -150,7 +150,7 @@ export const updatePost = (pId, body, seterr, navigate) => {
       },
     })
     .then((res) => {
-      ////console.log(res);
+      console.log(res);
       seterr("post succesfully added");
       navigate(`/blog/${res.data.data.slug}`);
     })
