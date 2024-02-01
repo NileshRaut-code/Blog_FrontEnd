@@ -37,12 +37,6 @@ const Editor = (postdata) => {
   };
 
   function handleUpdate() {
-    // const data = {
-    //   title: title?.current?.value,
-    //   slug: slug?.current?.value,
-    //   description: description?.current?.value,
-    // };
-    // const body = JSON.stringify(data);
     if (
       !title.current.value ||
       !slug.current.value ||
@@ -51,21 +45,28 @@ const Editor = (postdata) => {
       seterr("All filed are required to create post");
       return;
     }
-    const body = new FormData();
-    body.append("title", title?.current?.value);
-    body.append("slug", slug?.current?.value);
-    body.append("description", description?.current?.value);
-    if (imageInput) {
-      body.append("image", imageInput?.current?.files[0]);
-      console.log(imageInput?.current?.files[0]);
-    }
 
     if (postdata.data.new === true) {
       //console.log("new Post");
+      const body = new FormData();
+      body.append("title", title?.current?.value);
+      body.append("slug", slug?.current?.value);
+      body.append("description", description?.current?.value);
+      if (imageInput) {
+        body.append("image", imageInput?.current?.files[0]);
+        console.log(imageInput?.current?.files[0]);
+      }
       addPost(body, seterr, navigate);
     }
     if (postdata.data.new === false) {
       console.log("update");
+      const data = {
+        title: title?.current?.value,
+        slug: slug?.current?.value,
+        description: description?.current?.value,
+      };
+      const body = JSON.stringify(data);
+
       updatePost(pId, body, seterr, navigate);
     }
   }
