@@ -2,38 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Add styling to the code blocks */
-code {
-    background-color: #f7fafc;
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-    font-family: "Menlo", "Monaco", "Courier New", monospace;
-  }
-  
-  /* Style links */
-  a {
-    color: #4299e1;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Style headings */
-  h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 1rem;
-  }
-  
-  /* Style paragraphs */
-  p {
-    margin-bottom: 1rem;
-  }
-  
-  /* Style the container */
-  .prose {
-    max-width: 100%;
-  }
-  
+@layer components{
+    pre {
+        @apply w-full p-4 overflow-auto bg-gray-800 rounded-md mb-4;
+      }
+}

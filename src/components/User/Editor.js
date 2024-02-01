@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import { addPost, deletePost, updatePost } from "../../utils/userutils";
 const Editor = (postdata) => {
   const navigate = useNavigate();
-
+  const imageInput = useRef(null);
   const title = useRef(null);
   const slug = useRef(null);
   const description = useRef(null);
   const [err, seterr] = useState("");
   const pId = postdata.data.pId;
+  const [selectedImage, setSelectedImage] = useState(null);
   useEffect(() => {
     if (postdata) {
       title.current.value = postdata.data.title || "";
@@ -23,14 +24,42 @@ const Editor = (postdata) => {
       }
     }
   }, [postdata]);
+  const handleImageChange = (e) => {
+    const file = e.target?.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   function handleUpdate() {
-    const data = {
-      title: title?.current?.value,
-      slug: slug?.current?.value,
-      description: description?.current?.value,
-    };
-    const body = JSON.stringify(data);
+    // const data = {
+    //   title: title?.current?.value,
+    //   slug: slug?.current?.value,
+    //   description: description?.current?.value,
+    // };
+    // const body = JSON.stringify(data);
+    if (
+      !title.current.value ||
+      !slug.current.value ||
+      !description.current.value
+    ) {
+      seterr("All filed are required to create post");
+      return;
+    }
+    const body = new FormData();
+    body.append("title", title?.current?.value);
+    body.append("slug", slug?.current?.value);
+    body.append("description", description?.current?.value);
+    if (imageInput) {
+      body.append("image", imageInput?.current?.files[0]);
+      console.log(imageInput?.current?.files[0]);
+    }
+
     if (postdata.data.new === true) {
       //console.log("new Post");
       addPost(body, seterr, navigate);
@@ -62,6 +91,34 @@ const Editor = (postdata) => {
     <div className="container bg-gradient-to-r from-gray-800 via-gray-900 to-black  min-h-screen mx-auto p-4">
       <div className="md:w-1/2 mx-auto">
         <form onSubmit={(e) => e.preventDefault()}>
+          {selectedImage && (
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-white">
+                Selected Image:
+              </label>
+              <img
+                src={selectedImage}
+                alt="Selected"
+                className="mt-1 p-2 border rounded-md bg-slate-500"
+              />
+            </div>
+          )}
+          <div className="mb-4">
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium text-white"
+            >
+              Image:
+            </label>
+            <input
+              id="image"
+              type="file"
+              ref={imageInput}
+              onChange={handleImageChange}
+              className="mt-1 p-2 w-full border rounded-md bg-slate-400"
+            />
+          </div>
+
           <div className="mb-4">
             <label
               htmlFor="title"
@@ -104,6 +161,12 @@ const Editor = (postdata) => {
               ref={description}
               className="mt-1 p-2 border  bg-slate-500 rounded-md "
             />
+            <p
+              className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+              role="alert"
+            >
+              {err}
+            </p>
           </div>
           <button
             onClick={handleUpdate}
@@ -121,7 +184,6 @@ const Editor = (postdata) => {
               DeletePost
             </button>
           )}
-          {err}
         </form>
       </div>
     </div>

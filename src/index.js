@@ -15,6 +15,7 @@ import Dashboard from "./components/Dashboard.js";
 import Createpost from "./components/User/Createpost.js";
 import { EditPost } from "./components/User/EditPost.js";
 import ViewPost from "./components/User/ViewPost.js";
+import Author from "./components/Author/Author.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -67,6 +68,14 @@ const routes = createBrowserRouter([
       {
         path: "/blog/:slug",
         element: <ViewPost />,
+      },
+      {
+        path: "/profile",
+        element: <Dashboard />,
+      },
+      {
+        path: "/author/:username",
+        element: <Author />,
       },
     ],
   },

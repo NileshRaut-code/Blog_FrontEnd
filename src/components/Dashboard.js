@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 
 const Dashboard = () => {
   const data = useSelector((store) => store.user.data);
-  //console.log(data);
+  console.log(data);
   return (
     <>
       <div className="relative">
         {/* Cover Image */}
-        <image
+        <img
           src={data?.coverImage}
-          alt="Cover Image"
+          alt="Coverim"
           className="w-full h-96 md:h-80 lg:h-96 xl:h-120 object-cover"
         />
 

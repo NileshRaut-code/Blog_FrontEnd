@@ -9,8 +9,6 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.4",
-    "firebase-tools": "^13.1.0",
-    "http-proxy-middleware": "^2.0.6",
     "postcss": "^8.4.33",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,15 +21,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    
-    "build": "react-scripts build",
-    "serve": "serve -s build",
-    "s":"set PORT=5000 &&react-scripts start",
-    "start": "serve build -s -n -L -p 3000",
     "dev": "react-scripts start",
-    "builds": "set \"REACT_APP_PROXY=https://blogbackendnilesh.up.railway.app\" && react-scripts build",
-    "devs": "set \"REACT_APP_PROXY=https://blogbackendnilesh.up.railway.app\" && react-scripts start"
-
+    "start": "serve build -s -n -L -p 8000",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
