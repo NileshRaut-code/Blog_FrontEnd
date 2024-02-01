@@ -22,13 +22,27 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <Link to={"/"} className="hover:underline">
-                    Lonar Markate Placee
+                  <Link
+                    to={"https://www.nileshblog.tech"}
+                    className="hover:underline"
+                  >
+                    NileshBlog.Tech
                   </Link>
                 </li>
                 <li>
-                  <Link to={"/"} className="hover:underline">
-                    Tailwind CSS
+                  <Link
+                    to={"https://www.nileshblog.tech"}
+                    className="hover:underline"
+                  >
+                    Technilesh.com
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"https://dev.to/speaklouder"}
+                    className="hover:underline"
+                  >
+                    Speaklouder
                   </Link>
                 </li>
               </ul>
@@ -74,13 +88,13 @@ const Footer = () => {
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{" "}
             <Link to={"/"} className="hover:underline">
-              Lonar Markate Placee™
+              NileshRaut™
             </Link>
             . All Rights Reserved.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <Link
-              to={"/"}
+              to={"https://www.instagram.com/nileshblog_tech/?hl=en"}
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
             >
               <svg
@@ -99,7 +113,7 @@ const Footer = () => {
               <span className="sr-only">Facebook page</span>
             </Link>
             <Link
-              to={"/"}
+              to={"https://www.instagram.com/nileshblog_tech/?hl=en"}
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <svg
@@ -114,7 +128,7 @@ const Footer = () => {
               <span className="sr-only">Discord community</span>
             </Link>
             <Link
-              to={"/"}
+              to={"https://www.instagram.com/nileshblog_tech/?hl=en"}
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <svg
@@ -133,7 +147,7 @@ const Footer = () => {
               <span className="sr-only">Twitter page</span>
             </Link>
             <Link
-              to={"/"}
+              to={"/https://github.com/NileshRaut-code"}
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <svg
@@ -152,7 +166,7 @@ const Footer = () => {
               <span className="sr-only">GitHub account</span>
             </Link>
             <Link
-              to={"/"}
+              to={"https://www.instagram.com/nileshblog_tech/?hl=en"}
               className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
             >
               <svg
