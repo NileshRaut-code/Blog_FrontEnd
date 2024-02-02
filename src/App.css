@@ -4,12 +4,36 @@
 
 @layer components{
     pre {
-        @apply w-full p-4 overflow-auto bg-gray-800 rounded-md mb-4;
+        @apply w-full text-gray-400 p-4 overflow-auto bg-gray-800 rounded-md mb-4;
       }
       p{
-        @apply text-slate-400 ;
+        @apply  p-2 font-normal text-gray-500  dark:text-gray-400;
       }
-      h1,h2,h3{
-        @apply text-white ;
+
+     
+          h2{
+        @apply text-3xl font-extrabold text-white p-2;
       }
+          h3{
+        @apply text-2xl font-extrabold text-white;
+      }
+          h4{
+        @apply text-xl font-extrabold text-white;
+      }
+          h5{
+        @apply text-xl font-extrabold text-white;
+      }
+    
+      ul,ol{
+        @apply text-white list-decimal p-7 ;
+      }
+      strong{
+        @apply text-indigo-500;
+      }
+      a{
+        @apply text-indigo-500 cursor-pointer hover:bg-red-500;
+      }
+       
+
+
 }
