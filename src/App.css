@@ -6,4 +6,10 @@
     pre {
         @apply w-full p-4 overflow-auto bg-gray-800 rounded-md mb-4;
       }
+      p{
+        @apply text-slate-400 ;
+      }
+      h1,h2,h3{
+        @apply text-white ;
+      }
 }

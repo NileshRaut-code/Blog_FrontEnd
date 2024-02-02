@@ -12,7 +12,10 @@ const ViewPost = () => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/v1/blog/post/${slug}`)
-      .then((res) => setdata(res.data.data))
+      .then((res) => {
+        setdata(res.data.data);
+        console.log(res.data.data);
+      })
       .catch((err) => navigate("/404"));
   }, [navigate, slug]);
   return data ? (
