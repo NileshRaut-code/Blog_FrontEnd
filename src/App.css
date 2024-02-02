@@ -24,14 +24,14 @@
         @apply text-xl font-extrabold text-white;
       }
     
-      ul,ol{
+      ol{
         @apply text-white list-decimal p-7 ;
       }
       strong{
         @apply text-indigo-500;
       }
       a{
-        @apply text-indigo-500 cursor-pointer hover:bg-red-500;
+        @apply text-indigo-500 cursor-pointer;
       }
        
 

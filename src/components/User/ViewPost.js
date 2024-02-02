@@ -27,13 +27,13 @@ const ViewPost = () => {
               <address className="flex items-center mb-6 not-italic">
                 <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
                   <img
-                    className={data?.author?.avatar}
-                    src=""
+                    className="mr-4 w-16 h-16 rounded-full"
+                    src={data?.author?.avatar}
                     alt={data?.author?.fullName}
                   />
                   <div>
                     <Link
-                      to={`/author/${data?.data?.author?.username}`}
+                      to={`/author/${data?.author?.username}`}
                       className="text-xl font-bold text-gray-900 dark:text-white"
                     >
                       {data?.author?.fullName}
@@ -70,12 +70,14 @@ const ViewPost = () => {
             />
           </article>
         </div>
-        <Link
-          to={`/edit/${data?.slug}`}
-          className="bg-gray-800 hover:bg-blue-900 text-white px-4 py-2 rounded-md  focus:outline-none focus:ring focus:border-blue-300"
-        >
-          Edit Post
-        </Link>
+        <div className="flex justify-center items-center">
+          <Link
+            to={`/edit/${data?.slug}`}
+            className="bg-gray-800 hover:bg-blue-900 text-white px-4 py-2 rounded-md  focus:outline-none focus:ring focus:border-blue-300"
+          >
+            Edit Post
+          </Link>
+        </div>
       </main>
 
       {/* <div className="bg-gray-900 min-h-screen text-white p-6  ">
