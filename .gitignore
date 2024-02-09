@@ -4,10 +4,10 @@
 /node_modules
 /.pnp
 .pnp.js
-
+firebase.json
 # testing
 /coverage
-
+.firebase
 # production
 /build
 
