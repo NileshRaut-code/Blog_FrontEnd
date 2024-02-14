@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import Productcart from "../User/Productcart";
+import Postcart from "../User/Postcart";
 import Loading from "../Loader comp/Loading";
 import { userProfile } from "../../utils/userutils";
 const Author = () => {
@@ -66,13 +66,13 @@ const Author = () => {
 
         <div className="bg-gradient-to-r flex-wrap flex-col md:flex-row from-gray-800 via-gray-900 to-black text-white min-h-screen flex items-center justify-center ">
           {/* {allproductdata.data.map((inf) => {
-          <Productcart info />;
+          <Postcart info />;
           // console.log(info);
         })} */}
 
           {userProfiledata?.posts &&
             userProfiledata?.posts.map((product) => (
-              <Productcart key={product.id} data={product} />
+              <Postcart key={product.id} data={product} />
             ))}
         </div>
       </div>

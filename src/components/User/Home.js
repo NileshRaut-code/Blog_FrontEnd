@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct, removeProduct } from "../../utils/productSlice.js";
-import Productcart from "./Productcart.js";
+import Postcart from "./Postcart.js";
 import Loading from "../Loader comp/Loading.js";
 const Home = () => {
   const dispatch = useDispatch();
@@ -17,6 +17,10 @@ const Home = () => {
         .get(`${process.env.REACT_APP_API_URL}/api/v1/blog/allpost`)
         .then((res) => {
           console.log(res, "thiscaled");
+          const sortedData = res.data.data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          console.log(sortedData);
           dispatch(addProduct(res.data.data));
           console.log(allproductdata);
         }) //console.log(res))
@@ -31,7 +35,7 @@ const Home = () => {
           <Loading />
         ) : (
           allproductdata.map((data) => {
-            return <Productcart key={data._id} data={data} />;
+            return <Postcart key={data._id} data={data} />;
             // console.log(data);
           })
         )}

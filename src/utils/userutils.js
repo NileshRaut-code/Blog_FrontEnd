@@ -146,7 +146,7 @@ export const updatePost = (pId, body, seterr, navigate) => {
   axiosInstance
     .put(`/api/v1/blog/post/edit/${pId}`, body, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     })
     .then((res) => {

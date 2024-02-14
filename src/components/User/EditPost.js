@@ -17,6 +17,7 @@ export const EditPost = () => {
     slug: postdata?.data?.data?.slug,
     description: postdata?.data?.data?.description,
     pId: postdata?.data?.data?._id,
+    image: postdata?.data?.data?.image,
     new: false,
   };
 

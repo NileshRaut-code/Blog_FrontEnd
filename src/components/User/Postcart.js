@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "../../App.css";
-const Productcart = (data) => {
+const Postcart = (data) => {
   //console.log(data);
   const truncateHTML = (html, length) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -33,4 +33,4 @@ const Productcart = (data) => {
   );
 };
 
-export default Productcart;
+export default Postcart;

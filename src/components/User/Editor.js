@@ -17,6 +17,7 @@ const Editor = (postdata) => {
     if (postdata) {
       title.current.value = postdata.data.title || "";
       slug.current.value = postdata.data.slug || "";
+      setSelectedImage(postdata?.data?.image || "");
       // For ReactQuill, use its API to set content
       if (description.current) {
         description.current.getEditor().root.innerHTML =
@@ -60,12 +61,15 @@ const Editor = (postdata) => {
     }
     if (postdata.data.new === false) {
       console.log("update");
-      const data = {
-        title: title?.current?.value,
-        slug: slug?.current?.value,
-        description: description?.current?.value,
-      };
-      const body = JSON.stringify(data);
+      const body = new FormData();
+      title.current.value && body.append("title", title?.current?.value);
+
+      description.current.value &&
+        body.append("description", description?.current?.value);
+      if (imageInput.current.files) {
+        body.append("image", imageInput?.current?.files[0]);
+        console.log(imageInput?.current?.files[0]);
+      }
 
       updatePost(pId, body, seterr, navigate);
     }
