@@ -16,6 +16,7 @@ import Createpost from "./components/User/Createpost.js";
 import { EditPost } from "./components/User/EditPost.js";
 import ViewPost from "./components/User/ViewPost.js";
 import Author from "./components/Author/Author.js";
+import { Search } from "./components/User/Search.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -80,6 +81,10 @@ const routes = createBrowserRouter([
       {
         path: "/author/:username",
         element: <Author />,
+      },
+      {
+        path: "/search/:searchkey",
+        element: <Search />,
       },
     ],
   },

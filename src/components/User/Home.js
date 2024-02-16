@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addProduct, removeProduct } from "../../utils/productSlice.js";
 import Postcart from "./Postcart.js";
 import Loading from "../Loader comp/Loading.js";
+import SearchBox from "./SearchBox.js";
 const Home = () => {
   const dispatch = useDispatch();
   const allproductdata = useSelector((store) => store.products?.data);
@@ -30,15 +31,18 @@ const Home = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-r flex-wrap flex-col md:flex-row from-gray-800 via-gray-900 to-black text-white min-h-screen flex items-center justify-center ">
-        {!allproductdata ? (
-          <Loading />
-        ) : (
-          allproductdata.map((data) => {
-            return <Postcart key={data._id} data={data} />;
-            // console.log(data);
-          })
-        )}
+      <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black">
+        <SearchBox />
+        <div className=" flex-wrap flex-col md:flex-row text-white min-h-screen flex items-center justify-center ">
+          {!allproductdata ? (
+            <Loading />
+          ) : (
+            allproductdata.map((data) => {
+              return <Postcart key={data._id} data={data} />;
+              // console.log(data);
+            })
+          )}
+        </div>
       </div>
     </>
   );
