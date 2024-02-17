@@ -34,9 +34,11 @@ export const Search = () => {
     return (
       <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black">
         <SearchBox />
-        <div className=" flex-wrap flex-col md:flex-row  text-white min-h-screen flex items-center justify-center ">
-          <h2>No Post found</h2>
-          <p>Sorry, we couldn't find any Post matching your search.</p>
+        <div className=" flex-wrap flex-col   text-white min-h-screen flex items-center justify-center ">
+          <h2 className="text-3xl">NO POST FOUND </h2>
+          <p className="">
+            Sorry, we couldn't find any Post matching your search.
+          </p>
         </div>
       </div>
     );

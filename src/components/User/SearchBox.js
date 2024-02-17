@@ -11,7 +11,7 @@ const SearchBox = () => {
   };
 
   return (
-    <div class="max-w-md mx-auto">
+    <div class="max-w-md mx-auto pt-2">
       <label
         for="default-search"
         class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"

@@ -93,7 +93,7 @@ const Editor = (postdata) => {
   };
 
   return (
-    <div className="container bg-gradient-to-r from-gray-800 via-gray-900 to-black  min-h-screen mx-auto p-4">
+    <div className=" bg-gradient-to-r from-gray-800 via-gray-900 to-black  min-h-screen mx-auto p-4">
       <div className="md:w-1/2 mx-auto">
         <form onSubmit={(e) => e.preventDefault()}>
           {selectedImage && (

@@ -17,6 +17,7 @@ import { EditPost } from "./components/User/EditPost.js";
 import ViewPost from "./components/User/ViewPost.js";
 import Author from "./components/Author/Author.js";
 import { Search } from "./components/User/Search.js";
+import NotFound from "./components/constantcomponets/NotFound.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +86,10 @@ const routes = createBrowserRouter([
       {
         path: "/search/:searchkey",
         element: <Search />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
