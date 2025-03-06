@@ -1,35 +1,43 @@
 import { Link } from "react-router-dom";
-import "../../App.css";
-const Postcart = (data) => {
-  //console.log(data);
+
+const Postcart = ({ data }) => {
   const truncateHTML = (html, length) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     const textContent = doc.body.textContent || "";
-    return textContent.substring(0, length);
+    return textContent.substring(0, length)+"...";
   };
-  return (
-    <>
-      <div className=" md:h-64 md:w-[30%] h-128 w-[90%] m-5  md:ml-2 bg-opacity-20 backdrop-filter backdrop-blur-lg bg-clip-padding-box bg-white  border border-opacity-20 border-gray-300 rounded-lg p-6">
-        <h2 className="text-2xl font-bold mb-2">{data.data.title}</h2>
-        <p className="text-gray-300 mb-4">
-          {data.data.description ? truncateHTML(data.data.description, 35) : ""}
-        </p>
-        <h4 className="font-bold mb-2">
-          {data.data.author.username && (
-            <Link to={`/author/${data?.data?.author?.username}`}>
-              Author : {data?.data?.author?.username}
-            </Link>
-          )}
-        </h4>
 
-        <Link
-          to={`/blog/${data?.data?.slug}`}
-          className="bg-gray-800 hover:bg-blue-900 text-white px-4 py-2 rounded-md  focus:outline-none focus:ring focus:border-blue-300"
-        >
-          Read More
-        </Link>
-      </div>
-    </>
+  const truncateText = (text, length) => {
+    if (!text) return "";
+    if (text.length <= length) return text;
+    return text.substring(0, length).trim() + "...";
+  };
+
+  return (
+    <div className="md:h-64 md:w-[30%] h-128 w-[90%] bg-opacity-20 backdrop-filter backdrop-blur-lg border border-opacity-20 border-black/10 dark:border-white/10 rounded-lg p-6 transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl">
+      <Link to={`/blog/${data?.slug}`}>
+        <div className="flex flex-col justify-between h-full">
+          {/* Title at the Top */}
+          <h2 className="text-2xl font-bold">
+            {truncateText(data.title, 50)}
+          </h2>
+
+          {/* Description in the Middle */}
+          <div className="text-gray-600">
+            {data.description ? truncateHTML(data.description, 90) : ""}
+          </div>
+
+          {/* Author at the Bottom */}
+          {data.author?.username && (
+            <h4 className="font-bold mt-auto">
+              <Link to={`/author/${data.author.username}`}>
+                Author: {data.author.username}
+              </Link>
+            </h4>
+          )}
+        </div>
+      </Link>
+    </div>
   );
 };
 

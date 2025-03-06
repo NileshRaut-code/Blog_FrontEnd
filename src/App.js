@@ -14,6 +14,7 @@ const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userdata = useSelector((store) => store.user.data);
+  const theme = useSelector((store) => store.user.theme);
   useEffect(() => {
     if (userdata == null) {
       console.log("called");
@@ -25,12 +26,18 @@ const App = () => {
     }
   }, [dispatch, navigate, userdata]);
 
+
+  useEffect(()=>{
+    document.querySelector('html').classList.remove('dark','light');
+    document.querySelector('html').classList.add(theme);
+  },[theme])
+
   return loader ? (
-    <>
+    <div className="bg-[#F5EFFF] dark:bg-[#030712] min-h-[100vh]">
       <Header />
-      <Outlet />
+      <div className="mt-10"><Outlet /></div>
       <Footer />
-    </>
+    </div>
   ) : (
     <Loading />
   ); //add loader components ... so it check make request to check logged on every page...

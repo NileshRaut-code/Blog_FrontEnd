@@ -4,9 +4,6 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.16",
     "axios": "^1.6.4",
     "postcss": "^8.4.33",
@@ -21,8 +18,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "react-scripts start",
-    "start": "serve build -s -n -L -p 8000",
+    "dev": "react-scripts start -p 3000",
+    "start": "serve build -s -n -L -p 3000",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

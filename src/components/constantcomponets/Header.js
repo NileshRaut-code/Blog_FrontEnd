@@ -1,123 +1,127 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import { useState } from "react";
-const Header = () => {
-  const status = useSelector((store) => store.user.status);
+import { useSelector, useDispatch } from "react-redux";
+import { themechange } from "../../utils/userSlice.js";
 
+export default function Header() {
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user.status);
+  const theme = useSelector((store) => store.user.theme);
+  const darkMode = theme === "dark";
+  
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+
   return (
-    <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <Link to="/" className="flex items-center">
-            <img
-              src="https://www.nileshblog.tech/wp-content/uploads/2023/12/NileshBlog.Tech-Software-Development-Learning-Problem-Solving-Platform.svg"
-              className="mr-3 h-6 sm:h-9"
-              alt="NileshBlog.Tech Logo"
-            />
+    <nav className="sticky relative mx-8 md:mx-16 p-3 backdrop-blur-3xl flex justify-between items-center rounded-full shadow-md dark:shadow-lg fixed top-5 left-0 right-0 z-50 max-w-7xl px-6 border border-black/5 dark:border-white/10">
+      <div className="flex items-center gap-2">
+        <img
+          src="https://nileshblog.tech/wp-content/uploads/2023/12/NileshBlog.Tech-Software-Development-Learning-Problem-Solving-Platform.svg"
+          alt="DevStudio Logo"
+          className="w-32 h-8 dark:invert transition-transform duration-200 transform hover:scale-105"
+        />
+        <span className="text-black dark:text-white font-semibold text-lg transition-transform duration-200 transform hover:scale-105">
+          
+        </span>
+      </div>
+      <div className="hidden md:flex gap-6">
+        <Link
+          to=""
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Home
+        </Link>
+        {user &&  <Link
+          to="/create-post"
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Add New Post
+        </Link>}
+        {user &&  <Link
+          to="/profile"
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Profile
+        </Link>}
+      </div>
+      <div className="hidden md:flex items-center gap-4">
+        {!user ? (
+          <>
+            <Link to={'/login'}
+              className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+            >
+              Login
+            </Link>
+           
+          </>
+        ) : (
+          <Link to={'/dashboard'}
+            className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+          >
+            Dashboard
           </Link>
-          <div className="flex items-center lg:order-2">
-            {!status ? (
-              <Link
-                to="/login"
-                className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              >
-                Log in
-              </Link>
+        )}
+        <button
+          className="rounded-full px-2 py-2 bg-gray-300 dark:bg-transparent hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+          onClick={() => dispatch(themechange())}
+        >
+          {darkMode ? "☀️" : "🌙"}
+        </button>
+      </div>
+      <div className="md:hidden flex ">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 focus:outline-none">
+          <svg className="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             ) : (
-              <Link
-                to="/logout"
-                className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-              >
-                Logout
-              </Link>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             )}
-            {status && (
-              <Link
-                to="/create-post"
-                className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-              >
-                Createpost
-              </Link>
-            )}
-          </div>
-          <button
-            data-collapse-toggle="mobile-menu-2"
-            type="button"
-            className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="mobile-menu-2"
-            aria-expanded={isMenuOpen ? "true" : "false"}
-            onClick={toggleMenu}
+          </svg>
+        </button>
+        <button
+          className="rounded-full px-2 py-2 bg-gray-300 dark:bg-transparent hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+          onClick={() => dispatch(themechange())}
+        >
+          {darkMode ? "☀️" : "🌙"}
+        </button>
+      </div>
+      {isMenuOpen && (
+        <div className="absolute bg-[#F5EFFF] dark:bg-[#030712] rounded-3xl top-full left-0 w-full shadow-md py-4 flex flex-col items-center space-y-4 md:hidden">
+          <Link
+            to=""
+            className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
           >
-            {!isMenuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            )}
-          </button>
-
-          <div
-            className={`${
-              isMenuOpen ? "block" : "hidden"
-            } justify-between items-center w-full lg:flex lg:w-auto lg:order-1`}
-            id="mobile-menu-2"
+            Home
+          </Link>
+          <Link
+            to="#"
+            className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-              <li>
-                <Link
-                  to="/"
-                  className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
-                  aria-current="page"
-                >
-                  Home
-                </Link>
-              </li>
-              <li>
-                {status && (
-                  <Link
-                    to="/profile"
-                    className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                  >
-                    Profile
-                  </Link>
-                )}
-              </li>
-            </ul>
-          </div>
+            Home 2
+          </Link>
+          <Link
+            to="#"
+            className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+          >
+            Home 3
+          </Link>
+          {!user ? (
+            <>
+              <Link to={'/login'}
+                className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+              >
+                Login
+              </Link>
+             
+            </>
+          ) : (
+            <Link 
+              className="bg-black text-white dark:bg.white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
-      </nav>
-    </header>
+      )}
+    </nav>
   );
-};
-
-export default Header;
+}

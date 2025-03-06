@@ -8,7 +8,7 @@ const Dashboard = () => {
   const { avatar, email, fullName, username, createdAt } = data;
   return (
     <>
-      <div className="grid gap-4 px-4 sm:grid-cols-3 bg-gradient-to-r from-gray-800 via-gray-900 to-black  py-[20%]">
+      <div className="grid gap-4 px-4 sm:grid-cols-3 py-[20%]">
         <Link
           to={"/edit/profile"}
           className="absolute p-3 right-3 sm:right-28 text-white rounded-lg bg-gray-800 hover:bg-blue-900"

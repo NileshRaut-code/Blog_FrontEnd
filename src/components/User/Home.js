@@ -31,9 +31,9 @@ const Home = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-gray-800 via-gray-900 to-black">
+      <div className="bg-[#F5EFFF] dark:bg-[#030712] min-h-[100vh]">
         <SearchBox />
-        <div className=" flex-wrap flex-col md:flex-row text-white min-h-screen flex items-center justify-center ">
+        <div className="flex-wrap mx-10 flex-col md:flex-row flex items-center justify-center gap-8">
           {!allproductdata ? (
             <Loading />
           ) : (

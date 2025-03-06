@@ -17,17 +17,17 @@ const Author = () => {
 
   if (userProfiledata === undefined) {
     return (
-      <div className="container h-screen w-full bg-gray-700 mx-auto ">
+      <div className="container h-screen w-full mx-auto">
         <h1>No data</h1>
       </div>
     );
   }
   return userProfiledata ? (
-    <div className="bg-gray-700">
+    <div>
       <div
-        className={`container lg:px-20 md:px-10 sm:px-5 bg-gray-700 mx-auto `}
+        className={`container lg:px-20 md:px-10 sm:px-5 mx-auto `}
       >
-        <header className="bg-gray-800 p-4">
+        <header className="p-4">
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-white text-2xl font-bold">
@@ -64,7 +64,7 @@ const Author = () => {
 
         {/* Product listing */}
 
-        <div className="bg-gradient-to-r flex-wrap flex-col md:flex-row from-gray-800 via-gray-900 to-black text-white min-h-screen flex items-center justify-center ">
+        <div className="flex-wrap flex-col md:flex-row text-white min-h-screen flex items-center justify-center ">
           {/* {allproductdata.data.map((inf) => {
           <Postcart info />;
           // console.log(info);
