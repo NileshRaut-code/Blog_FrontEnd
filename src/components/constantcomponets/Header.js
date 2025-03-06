@@ -92,18 +92,12 @@ export default function Header() {
           >
             Home
           </Link>
-          <Link
-            to="#"
-            className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
-          >
-            Home 2
-          </Link>
-          <Link
-            to="#"
-            className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
-          >
-            Home 3
-          </Link>
+          {user &&  <Link
+          to="/profile"
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Profile
+        </Link>}
           {!user ? (
             <>
               <Link to={'/login'}
