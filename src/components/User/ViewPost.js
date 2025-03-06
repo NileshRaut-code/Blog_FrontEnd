@@ -4,11 +4,12 @@ import Loading from "../Loader comp/Loading";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 const ViewPost = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
   const [data, setdata] = useState(null);
-
+  const user=useSelector(store=>store.user.status)
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API_URL}/api/v1/blog/post/${slug}`)
@@ -70,14 +71,14 @@ const ViewPost = () => {
             />
           </article>
         </div>
-        <div className="flex justify-center items-center">
+       {user && <div className="flex mt-2 justify-center items-center">
           <Link
             to={`/edit/${data?.slug}`}
-            className="bg-gray-800 hover:bg-blue-900 text-white px-4 py-2 rounded-md  focus:outline-none focus:ring focus:border-blue-300"
+            className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
           >
             Edit Post
           </Link>
-        </div>
+        </div>}
       </main>
     </>
   ) : (

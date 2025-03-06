@@ -4,15 +4,15 @@
 
 @layer base {
   /* Updated typography for SEO */
-  h1 { @apply text-4xl text-gray-800; }
-  h2 { @apply text-3xl text-gray-800; }
-  h3 { @apply text-2xl text-gray-800; }
+  h1 { @apply  text-gray-800; }
+  h2 { @apply  text-gray-800; }
+  h3 { @apply  text-xl text-gray-800; }
   h4 { @apply text-xl text-gray-800; }
   h5 { @apply text-lg text-gray-800; }
   p, span { @apply text-base text-gray-800; }
-  .dark h1 { @apply text-4xl text-gray-200; }
-  .dark h2 { @apply text-3xl text-gray-200; }
-  .dark h3 { @apply text-2xl text-gray-200; }
+  .dark h1 { @apply  text-gray-200; }
+  .dark h2 { @apply  text-gray-200; }
+  .dark h3 { @apply text-xl  text-gray-200; }
   .dark h4 { @apply text-xl text-gray-200; }
   .dark h5 { @apply text-lg text-gray-200; }
   .dark p, .dark span { @apply text-base text-gray-200; }

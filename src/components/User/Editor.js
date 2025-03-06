@@ -98,20 +98,20 @@ const Editor = (postdata) => {
         <form onSubmit={(e) => e.preventDefault()}>
           {selectedImage && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-white">
+              <label className="block text-sm font-medium ">
                 Selected Image:
               </label>
               <img
                 src={selectedImage}
                 alt="Selected"
-                className="mt-1 p-2 border rounded-md bg-slate-500"
+                className="mt-1 p-2 border rounded-md "
               />
             </div>
           )}
           <div className="mb-4">
             <label
               htmlFor="image"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium "
             >
               Image:
             </label>
@@ -120,14 +120,14 @@ const Editor = (postdata) => {
               type="file"
               ref={imageInput}
               onChange={handleImageChange}
-              className="mt-1 p-2 w-full border rounded-md bg-slate-400"
+              className="mt-1 p-2 w-full border rounded-md "
             />
           </div>
 
           <div className="mb-4">
             <label
               htmlFor="title"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium "
             >
               Title:
             </label>
@@ -136,13 +136,13 @@ const Editor = (postdata) => {
               type="text"
               ref={title}
               onChange={handleTitleChange}
-              className="mt-1 p-2 w-full border rounded-md bg-slate-400"
+              className="mt-1 p-2 w-full border rounded-md "
             />
           </div>
           <div className="mb-4">
             <label
               htmlFor="slug"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium "
             >
               Slug:
             </label>
@@ -150,45 +150,47 @@ const Editor = (postdata) => {
               id="slug"
               type="text"
               ref={slug}
-              className="mt-1 p-2 w-full border rounded-md bg-slate-400"
+              className="mt-1 p-2 w-full border rounded-md "
               readOnly
             />
           </div>
           <div className="mb-4">
             <label
               htmlFor="content"
-              className="block text-sm font-medium text-white"
+              className="block text-sm font-medium "
             >
               Content:
             </label>
             <ReactQuill
               id="content"
               ref={description}
-              className="mt-1 p-2 border  bg-slate-500 rounded-md "
+              className="mt-1 p-2 border   rounded-md "
             />
             <p
-              className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+              className="p-4 mb-4 text-sm text-red-800 rounded-lg  dark:text-red-400"
               role="alert"
             >
               {err}
             </p>
           </div>
-          <button
+        <div className="flex flex-row gap-4">
+        <button
             onClick={handleUpdate}
             type="submit"
-            className="bg-gray-800 hover:bg-blue-900  text-white py-2 px-4 rounded-md"
-          >
-            {postdata.data.new ? "Submit" : "Update"}
+            className={`flex flex-col justify-beween items-center bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-green-600  font-bold py-2 px-6 rounded-lg  transition-all duration-300 hover:ring-2 hover:ring-green-900`}
+            >
+            <p>{postdata.data.new ? "Submit" : "Update"}</p>
           </button>
           {!postdata.data.new && (
             <button
               onClick={handleDelete}
               type="submit"
-              className="bg-gray-800 hover:bg-blue-900 mx-2 text-white py-2 px-4 rounded-md"
-            >
-              DeletePost
+              className={`flex flex-col justify-beween items-center bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-red-600  font-bold py-2 px-6 rounded-lg  transition-all duration-300 hover:ring-2 hover:ring-red-900`}
+              >
+              <p>DeletePost</p>
             </button>
           )}
+        </div>
         </form>
       </div>
     </div>
