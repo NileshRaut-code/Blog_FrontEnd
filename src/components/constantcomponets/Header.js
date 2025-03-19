@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { themechange } from "../../utils/userSlice.js";
 
 export default function Header() {
   const dispatch = useDispatch();
+  const navigate=useNavigate()
   const user = useSelector((store) => store.user.status);
   const theme = useSelector((store) => store.user.theme);
   const darkMode = theme === "dark";
-  
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -37,10 +39,10 @@ export default function Header() {
           Add New Post
         </Link>}
         {user &&  <Link
-          to="/profile"
+          to="profile"
           className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
         >
-          Profile
+          Dashboard
         </Link>}
       </div>
       <div className="hidden md:flex items-center gap-4">
@@ -54,11 +56,43 @@ export default function Header() {
            
           </>
         ) : (
-          <Link to={'/dashboard'}
-            className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+          <div className="relative">
+          <button
+            onClick={() => setIsProfileOpen(!isProfileOpen)}
+            className="rounded-full px-2 font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105 "
           >
-            Dashboard
-          </Link>
+            <svg
+                className="w-8 h-8 rounded-full text-gray-700 dark:text-gray-300  transition-transform duration-200 transform hover:scale-105"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.914A5.005 5.005 0 0010 16a5.005 5.005 0 004.546-2.914A5 5 0 0010 11z"
+                  clipRule="evenodd"
+                />
+              </svg>
+          </button>
+
+          {isProfileOpen && (
+            <div className="absolute bg-[#F5EFFF] dark:bg-[#030712] right-0 mt-2 w-48  rounded-md shadow-lg z-10 border border-black/5 dark:border-white/10 ">
+              <Link
+                to="/profile"
+                className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                Profile
+              </Link>
+              <button
+                onClick={()=>{
+                  navigate('/logout')
+                }}
+                className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
         )}
         <button
           className="rounded-full px-2 py-2 bg-gray-300 dark:bg-transparent hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
@@ -93,10 +127,16 @@ export default function Header() {
             Home
           </Link>
           {user &&  <Link
-          to="/profile"
+          to="profile"
           className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
         >
-          Profile
+          Dashboard
+        </Link>}
+        {user &&  <Link
+          to="/create-post"
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Add New Post
         </Link>}
           {!user ? (
             <>
@@ -108,11 +148,43 @@ export default function Header() {
              
             </>
           ) : (
-            <Link 
-              className="bg-black text-white dark:bg.white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+            <div className="relative">
+            <button
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
+              className="rounded-full px-2 font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105 "
             >
-              Dashboard
-            </Link>
+              <svg
+                  className="w-8 h-8 rounded-full text-gray-700 dark:text-gray-300  transition-transform duration-200 transform hover:scale-105"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.914A5.005 5.005 0 0010 16a5.005 5.005 0 004.546-2.914A5 5 0 0010 11z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+            </button>
+  
+            {isProfileOpen && (
+              <div className="absolute bg-[#F5EFFF] dark:bg-[#030712] right-0 mt-2 w-48  rounded-md shadow-lg z-10 border border-black/5 dark:border-white/10 ">
+                <Link
+                  to="/profile"
+                  className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={()=>{
+                    navigate('/logout')
+                  }}
+                  className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
+                >
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
           )}
         </div>
       )}
