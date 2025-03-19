@@ -71,12 +71,13 @@ export const Loginuser = (
 
 
 export const GoogleLoginuser = (
-  token,
   dispatch,
   navigate,
   seterrmsg,
-  setLoading
+  setLoading,credentialResponse
 ) => {
+      const token = credentialResponse.credential;
+      console.log(token);
   axios
     .post(`${process.env.REACT_APP_API_URL}/api/v1/users/google-login`, {token}, {
       headers: {

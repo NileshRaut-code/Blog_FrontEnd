@@ -61,8 +61,9 @@ const Login = () => {
   }
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
-    const token = credentialResponse.credential;
-    GoogleLoginuser(dispatch, navigate, seterrmsg, token, setLoading);
+
+    
+    GoogleLoginuser(dispatch, navigate, seterrmsg,  setLoading,credentialResponse);
   }
   return (
     <div>
