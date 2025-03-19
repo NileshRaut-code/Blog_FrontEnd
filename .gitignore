@@ -12,7 +12,7 @@ firebase.json
 /build
 
 Test.js
-
+.env
 # misc
 .DS_Store
 .env.local
