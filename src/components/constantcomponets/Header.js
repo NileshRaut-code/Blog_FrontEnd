@@ -59,7 +59,7 @@ export default function Header() {
           <div className="relative">
           <button
             onClick={() => setIsProfileOpen(!isProfileOpen)}
-            className="rounded-full px-2 font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105 "
+            className="rounded-full p-2 font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105 "
           >
             <svg
                 className="w-8 h-8 rounded-full text-gray-700 dark:text-gray-300  transition-transform duration-200 transform hover:scale-105"
