@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Loginuser, Signupuser } from "../utils/userutils";
+import { Loginuser, Signupuser,GoogleLoginuser } from "../utils/userutils";
+import {GoogleLogin ,GoogleOAuthProvider } from "@react-oauth/google"
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,14 +60,21 @@ const Login = () => {
     Signupuser(dispatch, navigate, seterrmsg, body, setLoading);
   }
 
+  const handleGoogleLoginSuccess = (credentialResponse) => {
+    const token = credentialResponse.credential;
+    GoogleLoginuser(dispatch, navigate, seterrmsg, token, setLoading);
+  }
   return (
     <div>
       {islogin ? (
         <div className="flex flex-col items-center justify-center max-h-screen mt-10">
           <h1 className="text-2xl font-bold mb-4">Login</h1>
-          <form 
-            className="border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm" 
-            onSubmit={(e) => { e.preventDefault(); handlelogin(); }}
+          <form
+            className="border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handlelogin();
+            }}
           >
             <div className="mb-4">
               <label className="block text-sm font-bold mb-2" htmlFor="email">
@@ -81,7 +89,10 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="password">
+              <label
+                className="block text-sm font-bold mb-2"
+                htmlFor="password"
+              >
                 Password
               </label>
               <input
@@ -93,17 +104,30 @@ const Login = () => {
               />
             </div>
             {errormsg && (
-              <p className="text-red-600 dark:text-red-600 text-sm my-2">{errormsg}</p>
+              <p className="text-red-600 dark:text-red-600 text-sm my-2">
+                {errormsg}
+              </p>
             )}
             <button
-             onClick={handlelogin}
-              className="cursor-pointer flex w-full justify-center rounded-md bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400   px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={handlelogin}
+              className="cursor-pointer flex w-full justify-center rounded-md bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {isLoading ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
-) :"Login"}
+              ) : (
+                "Login"
+              )}
             </button>
+            <div className="mt-4 ">
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}> <GoogleLogin
+          className="dark:text-white text-black"
+              onSuccess={handleGoogleLoginSuccess}
+              onError={() => seterrmsg("Google authentication error")}
+            /></GoogleOAuthProvider> 
+          </div>
           </form>
+          {/* Google Login Button */}
+
           <p
             className="cursor-pointer font-semibold leading-6 text-indigo-600 hover:text-indigo-500 mt-4"
             onClick={() => {
@@ -117,12 +141,18 @@ const Login = () => {
       ) : (
         <div className="flex flex-col items-center justify-center max-h-screen mt-10">
           <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
-          <form 
-            className="border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm" 
-            onSubmit={(e) => { e.preventDefault(); handlesignin(); }}
+          <form
+            className="border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handlesignin();
+            }}
           >
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="fullname">
+              <label
+                className="block text-sm font-bold mb-2"
+                htmlFor="fullname"
+              >
                 Full Name
               </label>
               <input
@@ -134,7 +164,10 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="email-signup">
+              <label
+                className="block text-sm font-bold mb-2"
+                htmlFor="email-signup"
+              >
                 Email
               </label>
               <input
@@ -146,7 +179,10 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="username">
+              <label
+                className="block text-sm font-bold mb-2"
+                htmlFor="username"
+              >
                 Username
               </label>
               <input
@@ -158,7 +194,10 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="contact">
+              <label
+                className="block text-sm font-bold mb-2"
+                htmlFor="contact"
+              >
                 Contact No
               </label>
               <input
@@ -170,7 +209,10 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="password-signup">
+              <label
+                className="block text-sm font-bold mb-2"
+                htmlFor="password-signup"
+              >
                 Password
               </label>
               <input
@@ -182,17 +224,28 @@ const Login = () => {
               />
             </div>
             {errormsg && (
-              <p className="text-red-600 dark:text-red-600 text-sm my-2">{errormsg}</p>
+              <p className="text-red-600 dark:text-red-600 text-sm my-2">
+                {errormsg}
+              </p>
             )}
             <button
-             onClick={handlesignin}
-              className="cursor-pointer flex w-full justify-center rounded-md bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400   px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              onClick={handlesignin}
+              className="cursor-pointer flex w-full justify-center rounded-md bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {isLoading ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
-) :"Sign In"}
+              ) : (
+                "Sign Up"
+              )}
             </button>
           </form>
+          {/* Google Signup Button */}
+          {/* <div className="mt-4">
+            <GoogleLogin
+              onSuccess={handleGoogleSignupSuccess}
+              onError={() => seterrmsg("Google authentication error")}
+            />
+          </div> */}
           <p
             className="cursor-pointer font-semibold leading-6 text-indigo-600 hover:text-indigo-500 mt-4"
             onClick={() => {
@@ -200,12 +253,13 @@ const Login = () => {
               seterrmsg(null);
             }}
           >
-            If you Already Have Account? LogIn
+            If you already have an account? Log In
           </p>
         </div>
       )}
     </div>
   );
+
 };
 
 export default Login;

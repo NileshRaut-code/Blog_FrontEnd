@@ -3,7 +3,7 @@ import { login, logout } from "./userSlice.js";
 
 export const Currentuser = async (dispatch) => {
   try {
-    console.log("called 1");
+    //console.log("called 1");
     const res = await axios.get(
       `${process.env.REACT_APP_API_URL}/api/v1/users/current-user`,
       {
@@ -12,13 +12,13 @@ export const Currentuser = async (dispatch) => {
     );
 
     if (res) {
-      console.log(res);
+      //console.log(res);
       dispatch(login(res.data.data));
-      console.log("called 2");
+      //console.log("called 2");
     } else {
-      console.log("logging out called");
+      //console.log("logging out called");
       dispatch(logout());
-      console.log("called");
+      //console.log("called");
       // throw new Error("user is not loged");
     }
   } catch (err) {
@@ -40,7 +40,7 @@ export const Loginuser = (
     password: password?.current?.value,
   };
   const body = JSON.stringify(data);
-  console.log(email?.current?.value, password?.current?.value);
+  //console.log(email?.current?.value, password?.current?.value);
 
   axios
     .post(`${process.env.REACT_APP_API_URL}/api/v1/users/login`, body, {
@@ -50,14 +50,48 @@ export const Loginuser = (
       withCredentials: true,
     })
     .then((res) => {
-      console.log(res);
+      //console.log(res);
 
       dispatch(login(res.data.data.user));
       navigate("/");
     })
     .catch((err) => {
       setLoading(false);
-      console.log(err.response.statusText);
+      //console.log(err.response.statusText);
+      let msgdata = err.response.statusText;
+      if (msgdata === "Unauthorized") {
+        msgdata = "Password is Incorrect";
+      } else {
+        msgdata = "Email is incorrect : user not found";
+      }
+      seterrmsg(msgdata);
+    });
+};
+
+
+
+export const GoogleLoginuser = (
+  token,
+  dispatch,
+  navigate,
+  seterrmsg,
+  setLoading
+) => {
+  axios
+    .post(`${process.env.REACT_APP_API_URL}/api/v1/users/google-login`, {token}, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    })
+    .then((res) => {
+      //console.log(res);
+      dispatch(login(res.data.data.user));
+      navigate("/");
+    })
+    .catch((err) => {
+      setLoading(false);
+      //console.log(err.response.statusText);
       let msgdata = err.response.statusText;
       if (msgdata === "Unauthorized") {
         msgdata = "Password is Incorrect";
@@ -75,11 +109,11 @@ const axiosInstance = axios.create({
 
 // Use the configured instance to make requests
 export const Logoutuser = (dispatch, navigate) => {
-  console.log("logout kar rahe he");
+  //console.log("logout kar rahe he");
   axiosInstance
     .delete("/api/v1/users/logout")
     .then((res) => {
-      console.log(res);
+      //console.log(res);
       dispatch(logout());
       navigate("/");
     })
@@ -87,7 +121,7 @@ export const Logoutuser = (dispatch, navigate) => {
 };
 
 export const Signupuser = (dispatch, navigate, seterrmsg, body, setLoading) => {
-  console.log("called 1");
+  //console.log("called 1");
   axios
     .post(`${process.env.REACT_APP_API_URL}/api/v1/users/register`, body, {
       headers: {
@@ -96,31 +130,31 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body, setLoading) => {
       withCredentials: true,
     })
     .then((res) => {
-      console.log(res);
+      //console.log(res);
       dispatch(login(res.data.data));
       navigate("/");
     })
     .catch((err) => {
-      console.log(err);
+      //console.log(err);
       setLoading(false);
-      console.log(err.response);
+      //console.log(err.response);
       if (err.response.status === 409)
         seterrmsg("User With Email or Username is already Existed");
     });
 };
 
 export const getPostdata = async (slug) => {
-  console.log(slug);
+  //console.log(slug);
   try {
     const data = await axios.get(
       `${process.env.REACT_APP_API_URL}/api/v1/blog/post/${slug}`
     );
-    console.log(data);
+    //console.log(data);
     if (!data) {
       throw new Error("not Existed Post");
     }
   } catch (error) {
-    console.log(error.message);
+    //console.log(error.message);
   }
 };
 
@@ -132,12 +166,12 @@ export const addPost = async (body, seterr, navigate) => {
       },
     })
     .then((res) => {
-      // //console.log(res);
+      // ////console.log(res);
       navigate(`/blog/${res.data.data.slug}`);
       seterr("New Post Added");
     })
     .catch((err) => {
-      ////console.log(err);
+      //////console.log(err);
       seterr("Error in Addin post");
     });
 };
@@ -150,12 +184,12 @@ export const updatePost = (pId, body, seterr, navigate) => {
       },
     })
     .then((res) => {
-      console.log(res);
+      //console.log(res);
       seterr("post succesfully added");
       navigate(`/blog/${res.data.data.slug}`);
     })
     .catch((err) => {
-      ////console.log(err);
+      //////console.log(err);
       //navigate("/404");
       seterr("You Have No Rights to Update Post ");
     });
@@ -165,11 +199,11 @@ export const deletePost = (pId, seterr, navigate) => {
   axiosInstance
     .delete(`/api/v1/blog/post/delete/${pId}`)
     .then((res) => {
-      ////console.log(res);
+      //////console.log(res);
       navigate("/");
     })
     .catch((err) => {
-      ////console.log(err);
+      //////console.log(err);
       //navigate("/404");
       seterr("You Have No Rights to Delete Post ");
     });

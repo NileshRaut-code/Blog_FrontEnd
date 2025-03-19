@@ -13,7 +13,7 @@ const Author = () => {
 
   useEffect(() => {
     userProfile(username, setuserProfiledata, navigate);
-  }, [username, navigate, userProfiledata]);
+  }, [username, navigate]);
 
   if (userProfiledata === undefined) {
     return (
