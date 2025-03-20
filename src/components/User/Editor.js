@@ -48,19 +48,19 @@ const Editor = (postdata) => {
     }
 
     if (postdata.data.new === true) {
-      //console.log("new Post");
+      ////console.log("new Post");
       const body = new FormData();
       body.append("title", title?.current?.value);
       body.append("slug", slug?.current?.value);
       body.append("description", description?.current?.value);
       if (imageInput) {
         body.append("image", imageInput?.current?.files[0]);
-        console.log(imageInput?.current?.files[0]);
+        //console.log(imageInput?.current?.files[0]);
       }
       addPost(body, seterr, navigate);
     }
     if (postdata.data.new === false) {
-      console.log("update");
+      //console.log("update");
       const body = new FormData();
       title.current.value && body.append("title", title?.current?.value);
 
@@ -68,7 +68,7 @@ const Editor = (postdata) => {
         body.append("description", description?.current?.value);
       if (imageInput.current.files) {
         body.append("image", imageInput?.current?.files[0]);
-        console.log(imageInput?.current?.files[0]);
+        //console.log(imageInput?.current?.files[0]);
       }
 
       updatePost(pId, body, seterr, navigate);

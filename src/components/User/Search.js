@@ -14,7 +14,7 @@ export const Search = () => {
         `${process.env.REACT_APP_API_URL}/api/v1/blog/allpost/search/${searchkey}`
       )
       .then((res) => {
-        console.log(res, "thiscaled");
+        //console.log(res, "thiscaled");
         if (res.data.size === 0) {
           Setallproductdata("Not Found");
         } else {

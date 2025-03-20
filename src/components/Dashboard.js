@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const data = useSelector((store) => store.user.data);
-  console.log(data);
+  //console.log(data);
   const { avatar, email, fullName, username, createdAt } = data;
   return (
     <>
