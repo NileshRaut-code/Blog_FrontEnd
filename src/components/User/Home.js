@@ -8,24 +8,19 @@ import SearchBox from "./SearchBox.js";
 const Home = () => {
   const dispatch = useDispatch();
   const allproductdata = useSelector((store) => store.products?.data);
-  const productarray = [];
-  console.log(productarray);
-  console.log(allproductdata);
+  
   useEffect(() => {
     if (allproductdata === null) {
-      console.log("this is all product data calling");
       axios
         .get(`${process.env.REACT_APP_API_URL}/api/v1/blog/allpost`)
         .then((res) => {
-          console.log(res, "thiscaled");
-          const sortedData = res.data.data.sort(
+        res.data.data.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
-          console.log(sortedData);
           dispatch(addProduct(res.data.data));
-          console.log(allproductdata);
-        }) //console.log(res))
-        .catch((err) => dispatch(removeProduct())); //console.log(err));
+          //console.log(allproductdata);
+        }) ////console.log(res))
+        .catch((err) => dispatch(removeProduct())); ////console.log(err));
     }
   }, [allproductdata, dispatch]);
 
@@ -39,7 +34,7 @@ const Home = () => {
           ) : (
             allproductdata.map((data) => {
               return <Postcart key={data._id} data={data} />;
-              // console.log(data);
+              // //console.log(data);
             })
           )}
         </div>

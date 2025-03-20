@@ -127,7 +127,6 @@ const Login = () => {
             /></GoogleOAuthProvider> 
           </div>
           </form>
-          {/* Google Login Button */}
 
           <p
             className="cursor-pointer font-semibold leading-6 text-indigo-600 hover:text-indigo-500 mt-4"

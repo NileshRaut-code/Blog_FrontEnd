@@ -53,7 +53,10 @@ export const Loginuser = (
       //console.log(res);
 
       dispatch(login(res.data.data.user));
-      navigate("/");
+      if(!res.data.data.user.isVerified){navigate("/verify")}
+      else{
+        navigate("/");
+      }
     })
     .catch((err) => {
       setLoading(false);
@@ -77,7 +80,7 @@ export const GoogleLoginuser = (
   setLoading,credentialResponse
 ) => {
       const token = credentialResponse.credential;
-      console.log(token);
+     // console.log(token);
   axios
     .post(`${process.env.REACT_APP_API_URL}/api/v1/users/google-login`, {token}, {
       headers: {
@@ -133,7 +136,7 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body, setLoading) => {
     .then((res) => {
       //console.log(res);
       dispatch(login(res.data.data));
-      navigate("/");
+      navigate("/verify");
     })
     .catch((err) => {
       //console.log(err);
@@ -233,3 +236,52 @@ export const userProfile = async (username, setuserProfiledata, navigate) => {
     navigate("/404");
   }
 };
+
+export const verifyUser =(dispatch,navigate,otpCode,seterrmsg)=>{
+  axiosInstance
+    .post(`${process.env.REACT_APP_API_URL}/api/v1/users/verifyotp`, {code:otpCode},{
+      headers: {
+        "Content-Type": "application/json",
+      },
+     
+    })
+    .then((res) => {
+      //console.log(res);
+      dispatch(login(res.data.data.user));
+      seterrmsg("OTP Verfied succesfully")
+      navigate("/");
+    }).catch((err)=>{
+     console.log(err.response.status);
+
+      if(err.response.status===400){
+        seterrmsg("The OTP is WRONG")
+      }
+      if(err.response.status===500){
+        seterrmsg("SOme thing Went Wrong")
+      }
+      
+    })
+}
+export const resendOtp =(seterrmsg)=>{
+  axiosInstance
+  .post(`${process.env.REACT_APP_API_URL}/api/v1/users/reset-otp`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((res) => {
+    //console.log(res);
+    seterrmsg("OTP SEND succesfully")
+    
+  }).catch((err)=>{
+    // console.log(err.response.status);
+    if(err.response.status===400){
+      seterrmsg("The OTP is WRONG")
+    }
+    if(err.response.status===500){
+      seterrmsg("SOme thing Went Wrong")
+    }
+    
+  })
+}
+

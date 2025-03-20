@@ -17,6 +17,7 @@ import ViewPost from "./components/User/ViewPost.js";
 import Author from "./components/Author/Author.js";
 import { Search } from "./components/User/Search.js";
 import NotFound from "./components/constantcomponets/NotFound.js";
+import { OTP } from "./components/OTP.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -87,9 +88,14 @@ const routes = createBrowserRouter([
         element: <Search />,
       },
       {
+        path: "/verify",
+        element: <OTP />,
+      },
+      {
         path: "*",
         element: <NotFound />,
       },
+     
     ],
   },
 ]);
