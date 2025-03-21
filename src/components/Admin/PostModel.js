@@ -1,4 +1,3 @@
-// filepath: src/components/Admin/PostModal.js
 import React from 'react';
 import DOMPurify from 'dompurify';
 
