@@ -5,6 +5,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import DOMPurify from 'dompurify';
+
 const ViewPost = () => {
   const navigate = useNavigate();
   const { slug } = useParams();
@@ -67,7 +69,7 @@ const ViewPost = () => {
             </header>
             <div
               className="prose max-w-full"
-              dangerouslySetInnerHTML={{ __html: data?.description }}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(data?.description) }}
             />
           </article>
         </div>

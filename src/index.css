@@ -32,14 +32,15 @@
   }
   
   /* New additions for more UI elements */
-  li, ul, ol, select {
-    @apply text-gray-800;
+  li, ul, ol, select ,strong {
+    @apply text-gray-800 px-4 py-2;
   }
   .dark li,
   .dark ul,
   .dark ol,
-  .dark select {
-    @apply text-gray-200;
+  .dark select,
+  .dark strong {
+    @apply text-gray-200 px-4 py-2;
   }
 }
 

@@ -18,6 +18,9 @@ import Author from "./components/Author/Author.js";
 import { Search } from "./components/User/Search.js";
 import NotFound from "./components/constantcomponets/NotFound.js";
 import { OTP } from "./components/OTP.js";
+import AdminDashboard from './components/Admin/AdminDashboard';
+import { AdminHome } from "./components/Admin/AdminHome.js";
+import PostPub from "./components/Admin/PostPub.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -91,10 +94,28 @@ const routes = createBrowserRouter([
         path: "/verify",
         element: <OTP />,
       },
+
+
+      {
+        path: "/admin",
+        element:  <Auth aut={true}><AdminDashboard /></Auth>, // Replace with your admin dashboard component
+        children: [
+          {
+            path: "", 
+            element: <AdminHome/>, 
+          },
+          {
+            path: "post/state/:state", 
+            element: <PostPub/>, 
+          },
+        ],
+      },
       {
         path: "*",
         element: <NotFound />,
       },
+
+
      
     ],
   },
