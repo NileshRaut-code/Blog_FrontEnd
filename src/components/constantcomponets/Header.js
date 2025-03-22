@@ -6,6 +6,8 @@ import { themechange } from "../../utils/userSlice.js";
 export default function Header() {
   const dispatch = useDispatch();
   const navigate=useNavigate()
+  const role=useSelector((store) => store.user?.data?.role);
+
   const user = useSelector((store) => store.user.status);
   const theme = useSelector((store) => store.user.theme);
   const darkMode = theme === "dark";
@@ -44,6 +46,13 @@ export default function Header() {
         >
           Dashboard
         </Link>}
+        {user && role==="admin" &&  <Link
+          to="/admin"
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Admin Dashboard
+        </Link>}
+      
       </div>
       <div className="hidden md:flex items-center gap-4">
         {!user ? (
@@ -131,6 +140,12 @@ export default function Header() {
           className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
         >
           Dashboard
+        </Link>}
+        {user && role==="admin" &&  <Link
+          to="/admin"
+          className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+        >
+          Admin Dashboard
         </Link>}
         {user &&  <Link
           to="/create-post"
