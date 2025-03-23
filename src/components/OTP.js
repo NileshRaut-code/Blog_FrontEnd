@@ -77,7 +77,7 @@ export const OTP = () => {
 
   return (
     <div className="flex flex-col items-center justify-center max-h-screen mt-10">
-      <h1 className="text-2xl font-bold mb-4">Enter OTP</h1>
+      <h3 className="text-2xl font-bold mb-4">Enter OTP</h3>
       <div className="flex flex-col gap-4 border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm">
         <div className="space-x-4 flex justify-center ">
           {otp.map((digit, index) => (

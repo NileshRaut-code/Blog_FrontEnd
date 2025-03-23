@@ -30,9 +30,9 @@ const Author = () => {
         <header className="p-4">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-white text-2xl font-bold">
+              <div className="text-white text-2xl font-bold">
                 {userProfiledata?.user?.username}
-              </h1>
+              </div>
               <p className="text-gray-300">{userProfiledata?.user?.fullName}</p>
             </div>
           </div>
@@ -47,9 +47,9 @@ const Author = () => {
               className="w-12 h-12 rounded-full mr-2"
             />
             <div>
-              <h2 className="text-xl font-bold">
+              <div className="text-xl font-bold">
                 {userProfiledata?.user?.fullName}
-              </h2>
+              </div>
               <p>{userProfiledata?.user?.email}</p>
             </div>
           </div>

@@ -35,7 +35,7 @@ export const Search = () => {
       <div>
         <SearchBox />
         <div className="flex-wrap flex-col text-white min-h-screen flex items-center justify-center">
-          <h2 className="text-3xl">NO POST FOUND</h2>
+          <h3 className="text-3xl">NO POST FOUND</h3>
           <p>Sorry, we couldn't find any Post matching your search.</p>
         </div>
       </div>

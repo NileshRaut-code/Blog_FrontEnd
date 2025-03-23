@@ -23,23 +23,23 @@ const Dashboard = () => {
           />
         </div>
         <div className=" ">
-          <h2 className="text-2xl">
+          <h3 className="text-2xl">
             <span className="text-gray-500">Name :</span> {fullName}
-          </h2>
-          <h2 className="text-2xl">
+          </h3>
+          <h3 className="text-2xl">
             <span className="text-gray-500">Email :</span>
             {email}
-          </h2>
-          <h2 className="text-2xl">
+          </h3>
+          <h3 className="text-2xl">
             <span className="text-gray-500">UserName :</span> @{username}
-          </h2>
-          <h2 className="text-2xl">
+          </h3>
+          <h3 className="text-2xl">
             <span className="text-gray-500">Registred On :</span>{" "}
             {new Date(createdAt).toLocaleDateString("en-US", {
               month: "long",
               year: "numeric",
             })}
-          </h2>
+          </h3>
         </div>
       </div>
     </>

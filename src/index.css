@@ -3,19 +3,20 @@
 @tailwind utilities;
 
 @layer base {
-  /* Updated typography for SEO */
-  h1 { @apply  text-gray-800; }
-  h2 { @apply  text-gray-800; }
-  h3 { @apply  text-xl text-gray-800; }
-  h4 { @apply text-xl text-gray-800; }
-  h5 { @apply text-lg text-gray-800; }
-  p, span { @apply text-base text-gray-800; }
-  .dark h1 { @apply  text-gray-200; }
-  .dark h2 { @apply  text-gray-200; }
-  .dark h3 { @apply text-xl  text-gray-200; }
-  .dark h4 { @apply text-xl text-gray-200; }
-  .dark h5 { @apply text-lg text-gray-200; }
-  .dark p, .dark span { @apply text-base text-gray-200; }
+  h1 { @apply text-3xl font-bold text-gray-900 leading-tight mb-2; }
+  h2 { @apply text-3xl font-semibold text-gray-900 leading-snug  mb-2; }
+  h3 { @apply text-2xl font-semibold text-gray-800 leading-snug  mb-2; }
+  h4 { @apply text-xl font-medium text-gray-800 leading-normal  mb-2; }
+  h5 { @apply text-lg font-medium text-gray-700 leading-normal  mb-2; }
+  p, span { @apply text-lg text-gray-700 leading-relaxed; }
+  
+  /* Dark mode */
+  .dark h1 { @apply text-3xl font-bold text-gray-200 leading-tight  mb-2; }
+  .dark h2 { @apply text-3xl font-semibold text-gray-200 leading-snug  mb-2; }
+  .dark h3 { @apply text-2xl font-semibold text-gray-300 leading-snug  mb-2; }
+  .dark h4 { @apply text-xl font-medium text-gray-300 leading-normal  mb-2; }
+  .dark h5 { @apply text-lg font-medium text-gray-400 leading-normal  mb-2; }
+  .dark p, .dark span { @apply text-lg text-gray-400 leading-relaxed  mb-2; }
   
   label {
     @apply text-gray-600;
@@ -25,22 +26,22 @@
   }
   
   pre {
-    @apply p-8 m-2 text-red-500 border dark:border-white/10 border-black/5;
+    @apply p-8 m-2 text-red-500 border dark:border-white/10 border-black/5 whitespace-pre-wrap break-words;
   }
   .dark pre {
-    @apply p-8 m-2 text-pink-500 border;
+    @apply p-8 m-2 text-pink-500 border whitespace-pre-wrap break-words;
   }
   
   /* New additions for more UI elements */
   li, ul, ol, select ,strong {
-    @apply text-gray-800 px-4 py-2;
+    @apply text-gray-800 px-2;
   }
   .dark li,
   .dark ul,
   .dark ol,
   .dark select,
   .dark strong {
-    @apply text-gray-200 px-4 py-2;
+    @apply text-gray-200 px-2;
   }
 }
 

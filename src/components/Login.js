@@ -69,7 +69,7 @@ const Login = () => {
     <div>
       {islogin ? (
         <div className="flex flex-col items-center justify-center max-h-screen mt-10">
-          <h1 className="text-2xl font-bold mb-4">Login</h1>
+          <h3 className="text-2xl font-bold mb-4">Login</h3>
           <form
             className="border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm"
             onSubmit={(e) => {
@@ -140,7 +140,7 @@ const Login = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center max-h-screen mt-10">
-          <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
+          <h3 className="text-2xl font-bold mb-4">Sign Up</h3>
           <form
             className="border border-black/5 dark:border-white/10 p-6 rounded shadow-md w-full max-w-sm"
             onSubmit={(e) => {

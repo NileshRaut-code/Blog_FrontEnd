@@ -62,7 +62,7 @@ const ViewPost = () => {
                   </div>
                 </div>
               </address>
-              {data.image && <img src={data?.image} alt={data?.title} />}
+              {data.image && data.image!=="undefined" && <img src={data?.image} alt={data?.title} />}
               <h1 className="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">
                 {data?.title}
               </h1>

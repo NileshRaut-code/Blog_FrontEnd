@@ -18,9 +18,9 @@ const Postcart = ({ data }) => {
       <Link to={`/blog/${data?.slug}`}>
         <div className="flex flex-col justify-between h-full">
           {/* Title at the Top */}
-          <h2 className="text-2xl font-bold">
+          <h3 className="text-2xl font-bold">
             {truncateText(data.title, 50)}
-          </h2>
+          </h3>
 
           {/* Description in the Middle */}
           <div className="text-gray-600">
