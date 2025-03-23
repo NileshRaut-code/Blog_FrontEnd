@@ -21,6 +21,7 @@ import { OTP } from "./components/OTP.js";
 import AdminDashboard from './components/Admin/AdminDashboard';
 import { AdminHome } from "./components/Admin/AdminHome.js";
 import PostPub from "./components/Admin/PostPub.js";
+import Allusers from "./components/Admin/Allusers.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -103,6 +104,10 @@ const routes = createBrowserRouter([
           {
             path: "", 
             element: <AdminHome/>, 
+          },
+          {
+            path: "allusers", 
+            element: <Allusers/>, 
           },
           {
             path: "post/state/:state", 

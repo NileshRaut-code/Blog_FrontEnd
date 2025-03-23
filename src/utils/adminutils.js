@@ -14,3 +14,12 @@ export const PostStateChanged = async (s,_id) => {
       .catch((err) => console.log(err));
   };
   
+
+  export const Alltheusers = async (setdata) => {
+    axios
+      .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/allusers`,{}, { withCredentials: true })
+      .then((res) => {setdata(res.data.data)
+       })
+      .catch((err) => console.log(err));
+  };
+  

@@ -64,7 +64,7 @@ const Author = () => {
 
         {/* Product listing */}
 
-        <div className="flex-wrap flex-col md:flex-row text-white min-h-screen flex items-center justify-center ">
+        <div className="flex-wrap flex-col md:flex-row gap-8 text-white min-h-screen flex items-center justify-center ">
           {/* {allproductdata.data.map((inf) => {
           <Postcart info />;
           // console.log(info);

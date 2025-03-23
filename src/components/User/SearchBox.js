@@ -18,13 +18,13 @@ const SearchBox = () => {
       value={searchKey}
       placeholder="Search..."
       onChange={(e) => setSearchKey(e.target.value)}
-      className="px-4 py-2 w-60 sm:w-72 md:w-96 bg-transparent text-gray-800 dark:text-white border-none focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-500"
+      className="px-4 py-2 w-60 sm:w-72 md:w-96 bg-transparent text-gray-800 dark:text-white border-none  placeholder-gray-500"
     />
     <button
       onClick={handleSearch}
-      className={`flex flex-col justify-beween items-center bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400  font-bold py-2 px-6 rounded-lg  transition-all duration-300 hover:ring-2 hover:ring-blue-400`}
+      className={`flex flex-col justify-beween items-center bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400  font-bold py-2 px-6 rounded-lg`}
     >
-      <p>Search</p>
+      <div className="dark:text-gray-500 text-gray-400">Search</div>
     </button>
   </div>
 </div>
