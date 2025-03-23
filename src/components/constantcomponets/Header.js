@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { themechange } from "../../utils/userSlice.js";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const navigate=useNavigate()
-  const role=useSelector((store) => store.user?.data?.role);
+  const navigate = useNavigate();
+  const role = useSelector((store) => store.user?.data?.role);
 
   const user = useSelector((store) => store.user.status);
   const theme = useSelector((store) => store.user.theme);
@@ -14,6 +14,27 @@ export default function Header() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const profileRef = useRef(null);
+
+  const closeProfileMenu = () => {
+    setIsProfileOpen(false);
+  };
+    const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+    useEffect(() => {
+    function handleClickOutside(event) {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileRef]);
 
   return (
     <nav className="sticky relative mx-8 md:mx-16 p-3 backdrop-blur-3xl flex justify-between items-center rounded-full shadow-md dark:shadow-lg fixed top-5 left-0 right-0 z-50 max-w-7xl px-6 border border-black/5 dark:border-white/10">
@@ -54,7 +75,7 @@ export default function Header() {
         </Link>}
       
       </div>
-      <div className="hidden md:flex items-center gap-4">
+      <div className="hidden md:flex items-center gap-4"  ref={profileRef}>
         {!user ? (
           <>
             <Link to={'/login'}
@@ -88,12 +109,14 @@ export default function Header() {
               <Link
                 to="/profile"
                 className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={closeProfileMenu}
               >
                 Profile
               </Link>
               <button
-                onClick={()=>{
-                  navigate('/logout')
+                onClick={() => {
+                  navigate('/logout');
+                  closeProfileMenu();
                 }}
                 className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
               >
@@ -132,24 +155,28 @@ export default function Header() {
           <Link
             to=""
             className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+             onClick={closeMenu}
           >
             Home
           </Link>
           {user &&  <Link
           to="profile"
           className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+           onClick={closeMenu}
         >
           Dashboard
         </Link>}
         {user && role==="admin" &&  <Link
           to="/admin"
           className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+           onClick={closeMenu}
         >
           Admin Dashboard
         </Link>}
         {user &&  <Link
           to="/create-post"
           className="text-gray-700 dark:text-gray-300 px-6 py-2 rounded-full hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+           onClick={closeMenu}
         >
           Add New Post
         </Link>}
@@ -157,6 +184,7 @@ export default function Header() {
             <>
               <Link to={'/login'}
                 className="bg-black text-white dark:bg-white dark:text-black px-6 py-2 rounded-full font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105"
+                 onClick={closeMenu}
               >
                 Login
               </Link>
@@ -186,6 +214,7 @@ export default function Header() {
                 <Link
                   to="/profile"
                   className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                   onClick={closeProfileMenu}
                 >
                   Profile
                 </Link>

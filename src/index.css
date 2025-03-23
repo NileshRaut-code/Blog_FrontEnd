@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 @layer base {
-  h1 { @apply text-3xl font-bold text-gray-900 leading-tight mb-2; }
-  h2 { @apply text-3xl font-semibold text-gray-900 leading-snug  mb-2; }
-  h3 { @apply text-2xl font-semibold text-gray-800 leading-snug  mb-2; }
-  h4 { @apply text-xl font-medium text-gray-800 leading-normal  mb-2; }
-  h5 { @apply text-lg font-medium text-gray-700 leading-normal  mb-2; }
+  h1 { @apply text-3xl font-bold text-gray-900 leading-tight ; }
+  h2 { @apply text-3xl font-semibold text-gray-900 leading-snug  ; }
+  h3 { @apply text-2xl font-semibold text-gray-800 leading-snug  ; }
+  h4 { @apply text-xl font-medium text-gray-800 leading-normal  ; }
+  h5 { @apply text-lg font-medium text-gray-700 leading-normal  ; }
   p, span { @apply text-lg text-gray-700 leading-relaxed; }
   
   /* Dark mode */
-  .dark h1 { @apply text-3xl font-bold text-gray-200 leading-tight  mb-2; }
-  .dark h2 { @apply text-3xl font-semibold text-gray-200 leading-snug  mb-2; }
-  .dark h3 { @apply text-2xl font-semibold text-gray-300 leading-snug  mb-2; }
-  .dark h4 { @apply text-xl font-medium text-gray-300 leading-normal  mb-2; }
-  .dark h5 { @apply text-lg font-medium text-gray-400 leading-normal  mb-2; }
-  .dark p, .dark span { @apply text-lg text-gray-400 leading-relaxed  mb-2; }
+  .dark h1 { @apply text-3xl font-bold text-gray-200 leading-tight  ; }
+  .dark h2 { @apply text-3xl font-semibold text-gray-200 leading-snug  ; }
+  .dark h3 { @apply text-2xl font-semibold text-gray-300 leading-snug  ; }
+  .dark h4 { @apply text-xl font-medium text-gray-300 leading-normal  ; }
+  .dark h5 { @apply text-lg font-medium text-gray-400 leading-normal  ; }
+  .dark p, .dark span { @apply text-lg text-gray-400 leading-relaxed  ; }
   
   label {
     @apply text-gray-600;
