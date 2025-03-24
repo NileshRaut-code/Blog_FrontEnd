@@ -146,7 +146,7 @@ export const getPostdata = async (slug) => {
     }
   } catch (err) {
     //console.log(error.message);
-    seterrmsg(err.response.data.message);
+    //seterrmsg(err.response.data.message);
   }
 };
 
@@ -166,7 +166,7 @@ export const addPost = async (body, seterr, navigate) => {
     })
     .catch((err) => {
       //////console.log(err);
-      seterrmsg(err.response.data.message);
+      seterr(err.response.data.message);
     });
 };
 
@@ -185,7 +185,7 @@ export const updatePost = (pId, body, seterr, navigate) => {
     .catch((err) => {
       //////console.log(err);
       //navigate("/404");
-      seterrmsg(err.response.data.message);
+      seterr(err.response.data.message);
     });
 };
 
@@ -199,7 +199,7 @@ export const deletePost = (pId, seterr, navigate) => {
     .catch((err) => {
       //////console.log(err);
       //navigate("/404");
-      seterrmsg(err.response.data.message);
+      seterr(err.response.data.message);
     });
 };
 
@@ -210,7 +210,6 @@ export const fetchData = async (navigate, slug, setPostdata) => {
     );
     setPostdata(postDataResult);
   } catch (err) {
-    console.error("Error fetching post data:", error.response.status);
     navigate("/404");
   }
 };
@@ -222,7 +221,6 @@ export const userProfile = async (username, setuserProfiledata, navigate) => {
     );
     setuserProfiledata(postDataResult.data.data);
   } catch (err) {
-    console.error("Error fetching post data:", error.response.status);
     navigate("/404");
   }
 };
