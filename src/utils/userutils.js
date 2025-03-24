@@ -60,14 +60,8 @@ export const Loginuser = (
     })
     .catch((err) => {
       setLoading(false);
-      //console.log(err.response.statusText);
-      let msgdata = err.response.statusText;
-      if (msgdata === "Unauthorized") {
-        msgdata = "Password is Incorrect";
-      } else {
-        msgdata = "Email is incorrect : user not found";
-      }
-      seterrmsg(msgdata);
+     
+      seterrmsg(err.response.data.message);
     });
 };
 
@@ -96,13 +90,7 @@ export const GoogleLoginuser = (
     .catch((err) => {
       setLoading(false);
       //console.log(err.response.statusText);
-      let msgdata = err.response.statusText;
-      if (msgdata === "Unauthorized") {
-        msgdata = "Password is Incorrect";
-      } else {
-        msgdata = "Email is incorrect : user not found";
-      }
-      seterrmsg(msgdata);
+      seterrmsg(err.response.data.message);
     });
 };
 
@@ -142,8 +130,7 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body, setLoading) => {
       //console.log(err);
       setLoading(false);
       //console.log(err.response);
-      if (err.response.status === 409)
-        seterrmsg("User With Email or Username is already Existed");
+      seterrmsg(err.response.data.message);
     });
 };
 
@@ -157,8 +144,9 @@ export const getPostdata = async (slug) => {
     if (!data) {
       throw new Error("not Existed Post");
     }
-  } catch (error) {
+  } catch (err) {
     //console.log(error.message);
+    seterrmsg(err.response.data.message);
   }
 };
 
@@ -178,7 +166,7 @@ export const addPost = async (body, seterr, navigate) => {
     })
     .catch((err) => {
       //////console.log(err);
-      seterr("Error in Adding post");
+      seterrmsg(err.response.data.message);
     });
 };
 
@@ -197,7 +185,7 @@ export const updatePost = (pId, body, seterr, navigate) => {
     .catch((err) => {
       //////console.log(err);
       //navigate("/404");
-      seterr("You Have No Rights to Update Post ");
+      seterrmsg(err.response.data.message);
     });
 };
 
@@ -211,7 +199,7 @@ export const deletePost = (pId, seterr, navigate) => {
     .catch((err) => {
       //////console.log(err);
       //navigate("/404");
-      seterr("You Have No Rights to Delete Post ");
+      seterrmsg(err.response.data.message);
     });
 };
 
@@ -221,7 +209,7 @@ export const fetchData = async (navigate, slug, setPostdata) => {
       `${process.env.REACT_APP_API_URL}/api/v1/blog/post/${slug}`
     );
     setPostdata(postDataResult);
-  } catch (error) {
+  } catch (err) {
     console.error("Error fetching post data:", error.response.status);
     navigate("/404");
   }
@@ -233,7 +221,7 @@ export const userProfile = async (username, setuserProfiledata, navigate) => {
       `${process.env.REACT_APP_API_URL}/api/v1/blog/author/${username}`
     );
     setuserProfiledata(postDataResult.data.data);
-  } catch (error) {
+  } catch (err) {
     console.error("Error fetching post data:", error.response.status);
     navigate("/404");
   }
@@ -253,15 +241,7 @@ export const verifyUser =(dispatch,navigate,otpCode,seterrmsg)=>{
       seterrmsg("OTP Verfied succesfully")
       navigate("/");
     }).catch((err)=>{
-     console.log(err.response.status);
-
-      if(err.response.status===400){
-        seterrmsg("The OTP is WRONG")
-      }
-      if(err.response.status===500){
-        seterrmsg("SOme thing Went Wrong")
-      }
-      
+      seterrmsg(err.response.data.message);
     })
 }
 export const resendOtp =(seterrmsg)=>{
@@ -277,13 +257,29 @@ export const resendOtp =(seterrmsg)=>{
     
   }).catch((err)=>{
     // console.log(err.response.status);
-    if(err.response.status===400){
-      seterrmsg("The OTP is WRONG")
-    }
-    if(err.response.status===500){
-      seterrmsg("SOme thing Went Wrong")
-    }
+    seterrmsg(err.response.data.message);
     
   })
 }
 
+
+export const changedPassword =(setErrorMsg,body,setLoading)=>{
+  axiosInstance
+  .post(`${process.env.REACT_APP_API_URL}/api/v1/users/changed-password`, body,{
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then((res) => {
+    //console.log(res);
+    setErrorMsg("Password Changed Succesfully")
+  
+  }).catch((err)=>{
+    
+      setErrorMsg(err.response.data.message)
+    
+    
+  }).finally(()=>{
+    setLoading(false)
+  })
+}

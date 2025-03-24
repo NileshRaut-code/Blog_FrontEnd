@@ -22,6 +22,7 @@ import AdminDashboard from './components/Admin/AdminDashboard';
 import { AdminHome } from "./components/Admin/AdminHome.js";
 import PostPub from "./components/Admin/PostPub.js";
 import Allusers from "./components/Admin/Allusers.js";
+import UpdatePassword from "./components/User/UpdatePassword.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -80,6 +81,14 @@ const routes = createBrowserRouter([
         element: (
           <Auth aut={true}>
             <Dashboard />
+          </Auth>
+        ),
+      },
+      {
+        path: "/profile/edit/password",
+        element: (
+          <Auth aut={true}>
+            <UpdatePassword />
           </Auth>
         ),
       },

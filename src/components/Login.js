@@ -23,12 +23,17 @@ const Login = () => {
       setLoading(false);
       return;
     }
+    // New Gmail validation for login
+    if (!/@gmail\.com$/.test(email.current.value)) {
+      seterrmsg("Email must be a valid Gmail email.");
+      setLoading(false);
+      return;
+    }
     Loginuser(dispatch, navigate, seterrmsg, email, password, setLoading);
   }
   function handlesignin() {
     seterrmsg(null);
     setLoading(true);
-    // console.log(avatar.current.files[0]);
     if (
       !email.current.value ||
       !password.current.value ||
@@ -40,7 +45,19 @@ const Login = () => {
       setLoading(false);
       return;
     }
-
+    // New Gmail validation for signup
+    if (!/@gmail\.com$/.test(email.current.value)) {
+      seterrmsg("Email must be a valid Gmail email.");
+      setLoading(false);
+      return;
+    }
+    // New strong password validation
+    const pwd = password.current.value;
+    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(pwd)) {
+      seterrmsg("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.");
+      setLoading(false);
+      return;
+    }
     // Validate phone number (allow only digits)
     const phoneNoValue = phoneno.current.value;
     if (phoneNoValue && !/^\d+$/.test(phoneNoValue)) {
@@ -50,7 +67,7 @@ const Login = () => {
     }
     const requestBody = {
       email: email?.current?.value,
-      password: password?.current?.value,
+      password: pwd,
       username: username?.current?.value,
       fullName: fullName?.current?.value,
       phoneno: phoneno?.current.value,
@@ -83,7 +100,7 @@ const Login = () => {
               </label>
               <input
                 id="email"
-                type="text"
+                type="email"
                 ref={email}
                 placeholder="Email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
@@ -171,10 +188,10 @@ const Login = () => {
                 Email
               </label>
               <input
-                id="email-signup"
-                type="text"
-                ref={email}
-                placeholder="Email"
+  id="email"
+  type="email"
+  ref={email}
+  placeholder="Email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
