@@ -61,7 +61,7 @@ export const Loginuser = (
     .catch((err) => {
       setLoading(false);
      
-      seterrmsg(err.response.data.message);
+      seterrmsg(err.response?.data?.message);
     });
 };
 
@@ -74,6 +74,7 @@ export const GoogleLoginuser = (
   setLoading,credentialResponse
 ) => {
       const token = credentialResponse.credential;
+      setLoading(true)
      // console.log(token);
   axios
     .post(`${process.env.REACT_APP_API_URL}/api/v1/users/google-login`, {token}, {
@@ -90,7 +91,7 @@ export const GoogleLoginuser = (
     .catch((err) => {
       setLoading(false);
       //console.log(err.response.statusText);
-      seterrmsg(err.response.data.message);
+      seterrmsg(err.response?.data?.message);
     });
 };
 
@@ -130,7 +131,7 @@ export const Signupuser = (dispatch, navigate, seterrmsg, body, setLoading) => {
       //console.log(err);
       setLoading(false);
       //console.log(err.response);
-      seterrmsg(err.response.data.message);
+      seterrmsg(err.response?.data?.message);
     });
 };
 
@@ -146,7 +147,7 @@ export const getPostdata = async (slug) => {
     }
   } catch (err) {
     //console.log(error.message);
-    //seterrmsg(err.response.data.message);
+    //seterrmsg(err.response?.data?.message);
   }
 };
 
@@ -166,7 +167,7 @@ export const addPost = async (body, seterr, navigate) => {
     })
     .catch((err) => {
       //////console.log(err);
-      seterr(err.response.data.message);
+      seterr(err.response?.data?.message);
     });
 };
 
@@ -185,7 +186,7 @@ export const updatePost = (pId, body, seterr, navigate) => {
     .catch((err) => {
       //////console.log(err);
       //navigate("/404");
-      seterr(err.response.data.message);
+      seterr(err.response?.data?.message);
     });
 };
 
@@ -199,14 +200,14 @@ export const deletePost = (pId, seterr, navigate) => {
     .catch((err) => {
       //////console.log(err);
       //navigate("/404");
-      seterr(err.response.data.message);
+      seterr(err.response?.data?.message);
     });
 };
 
 export const fetchData = async (navigate, slug, setPostdata) => {
   try {
     const postDataResult = await axios.get(
-      `${process.env.REACT_APP_API_URL}/api/v1/blog/post/${slug}`
+      `${process.env.REACT_APP_API_URL}/api/v1/blog/post/${slug}?state=update`
     );
     setPostdata(postDataResult);
   } catch (err) {
@@ -239,7 +240,7 @@ export const verifyUser =(dispatch,navigate,otpCode,seterrmsg)=>{
       seterrmsg("OTP Verfied succesfully")
       navigate("/");
     }).catch((err)=>{
-      seterrmsg(err.response.data.message);
+      seterrmsg(err.response?.data?.message);
     })
 }
 export const resendOtp =(seterrmsg)=>{
@@ -255,7 +256,7 @@ export const resendOtp =(seterrmsg)=>{
     
   }).catch((err)=>{
     // console.log(err.response.status);
-    seterrmsg(err.response.data.message);
+    seterrmsg(err.response?.data?.message);
     
   })
 }
@@ -274,7 +275,7 @@ export const changedPassword =(setErrorMsg,body,setLoading)=>{
   
   }).catch((err)=>{
     
-      setErrorMsg(err.response.data.message)
+      setErrorMsg(err.response?.data?.message)
     
     
   }).finally(()=>{
