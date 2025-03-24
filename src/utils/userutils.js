@@ -171,12 +171,14 @@ export const addPost = async (body, seterr, navigate) => {
     })
     .then((res) => {
       // ////console.log(res);
-      navigate(`/blog/${res.data.data.slug}`);
-      seterr("New Post Added");
+      seterr("Post Created Successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     })
     .catch((err) => {
       //////console.log(err);
-      seterr("Error in Addin post");
+      seterr("Error in Adding post");
     });
 };
 

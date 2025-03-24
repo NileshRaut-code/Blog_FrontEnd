@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "react-scripts start -p 8000",
+    "dev": "react-scripts start -p 3000",
     "build": "react-scripts build"
   },
   "eslintConfig": {
