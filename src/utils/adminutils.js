@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export const PostState = async (state, setdata,setloader) => {
+export const PostState = async (state, setdata,setloader,page,limit) => {
   axios
-    .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/post/${state}`,{}, { withCredentials: true })
+    .post(`${process.env.REACT_APP_API_URL}/api/v1/admin/post/${state}?page=${page}&limit=${limit}`,{}, { withCredentials: true })
     .then((res) => {setdata(res.data.data); setloader(true)})
     .catch();
 };
