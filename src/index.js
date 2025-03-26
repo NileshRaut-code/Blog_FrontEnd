@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Login from "./components/Login.js";
 import Home from "./components/User/Home.js";
 import { Provider } from "react-redux";
@@ -124,6 +124,7 @@ const routes = createBrowserRouter([
           },
         ],
       },
+      
       {
         path: "*",
         element: <NotFound />,
