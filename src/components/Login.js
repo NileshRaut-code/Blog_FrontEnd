@@ -136,7 +136,7 @@ const Login = () => {
             </button>
             <div className="mt-4 ">
           <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}> <GoogleLogin
-          theme={theme=="dark"?"filled_black":"outline"}
+          theme={theme==="dark"?"filled_black":"outline"}
           shape="pill"
               onSuccess={handleGoogleLoginSuccess}
               onError={() => seterrmsg("Google authentication error")}
