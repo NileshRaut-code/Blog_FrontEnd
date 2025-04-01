@@ -1,11 +1,16 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Loginuser, Signupuser,GoogleLoginuser } from "../utils/userutils";
-import {GoogleLogin ,GoogleOAuthProvider } from "@react-oauth/google"
+import {
+  Loginuser,
+  Signupuser,
+  GoogleLoginuser,
+  GoogleSignUser,
+} from "../utils/userutils";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 const Login = () => {
   const dispatch = useDispatch();
-  const theme=useSelector(store=>store.user.theme)
+  const theme = useSelector((store) => store.user.theme);
   const navigate = useNavigate();
   const phoneno = useRef(null);
   const email = useRef(null);
@@ -14,6 +19,10 @@ const Login = () => {
   const fullName = useRef(null);
   const [errormsg, seterrmsg] = useState(false);
   const [islogin, setlogin] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [signpassword, setsignPassword] = useState("");
+  const [token, settoken] = useState(null);
+
   const [isLoading, setLoading] = useState(false);
 
   function handlelogin() {
@@ -52,8 +61,14 @@ const Login = () => {
       return;
     }
     const pwd = password.current.value;
-    if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(pwd)) {
-      seterrmsg("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.");
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+        pwd
+      )
+    ) {
+      seterrmsg(
+        "Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character."
+      );
       setLoading(false);
       return;
     }
@@ -76,10 +91,29 @@ const Login = () => {
   }
 
   const handleGoogleLoginSuccess = (credentialResponse) => {
+    GoogleLoginuser(
+      dispatch,
+      navigate,
+      seterrmsg,
+      setLoading,
+      credentialResponse
+    );
+  };
 
-    
-    GoogleLoginuser(dispatch, navigate, seterrmsg,  setLoading,credentialResponse);
-  }
+  const handlegoogleSignup = async () => {
+    seterrmsg(true);
+    setIsOpen(true);
+    if (!token) {
+      seterrmsg("Some Error for Google Loggin");
+    }
+    GoogleSignUser(
+      { token, password: signpassword },
+      dispatch,
+      navigate,
+      setLoading,
+      seterrmsg
+    );
+  };
   return (
     <div>
       {islogin ? (
@@ -135,13 +169,16 @@ const Login = () => {
               )}
             </button>
             <div className="mt-4 ">
-          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}> <GoogleLogin
-          theme={theme==="dark"?"filled_black":"outline"}
-          shape="pill"
-              onSuccess={handleGoogleLoginSuccess}
-              onError={() => seterrmsg("Google authentication error")}
-            /></GoogleOAuthProvider> 
-          </div>
+              <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+               
+                <GoogleLogin
+                  theme={theme === "dark" ? "filled_black" : "outline"}
+                  shape="pill"
+                  onSuccess={handleGoogleLoginSuccess}
+                  onError={() => seterrmsg("Google authentication error")}
+                />
+              </GoogleOAuthProvider>
+            </div>
           </form>
 
           <p
@@ -187,10 +224,10 @@ const Login = () => {
                 Email
               </label>
               <input
-  id="email"
-  type="email"
-  ref={email}
-  placeholder="Email"
+                id="email"
+                type="email"
+                ref={email}
+                placeholder="Email"
                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
@@ -210,10 +247,7 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label
-                className="block text-sm font-bold mb-2"
-                htmlFor="contact"
-              >
+              <label className="block text-sm font-bold mb-2" htmlFor="contact">
                 Contact No
               </label>
               <input
@@ -239,6 +273,7 @@ const Login = () => {
                 className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               />
             </div>
+            
             {errormsg && (
               <p className="text-red-600 dark:text-red-600 text-sm my-2">
                 {errormsg}
@@ -246,7 +281,7 @@ const Login = () => {
             )}
             <button
               onClick={handlesignin}
-              className="cursor-pointer flex w-full justify-center rounded-md bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="cursor-pointer mb-4 flex w-full justify-center rounded-md bg-white bg-opacity-20 dark:bg-opacity-10 backdrop-blur-sm border border-blue-400 px-3 py-1.5 text-sm font-semibold leading-6 dark:text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               {isLoading ? (
                 <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
@@ -254,14 +289,18 @@ const Login = () => {
                 "Sign Up"
               )}
             </button>
-          </form>
-          {/* Google Signup Button */}
-          {/* <div className="mt-4">
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
             <GoogleLogin
-              onSuccess={handleGoogleSignupSuccess}
-              onError={() => seterrmsg("Google authentication error")}
+              theme={theme === "dark" ? "filled_black" : "outline"}
+              shape="pill"
+              onSuccess={(credentialResponse) => {
+                settoken(credentialResponse.credential);
+                setIsOpen(true);
+              }}
             />
-          </div> */}
+          </GoogleOAuthProvider>
+          </form>
+         
           <p
             className="cursor-pointer font-semibold leading-6 text-indigo-600 hover:text-indigo-500 mt-4"
             onClick={() => {
@@ -271,11 +310,67 @@ const Login = () => {
           >
             If you already have an account? Log In
           </p>
+          {isOpen && (
+            <div className="fixed inset-0 flex items-center justify-center bg-[#f5efffe9] dark:bg-[#030712cb]  bg-opacity-70">
+              <div className="bg-[#F5EFFF] dark:bg-[#030712] p-6 rounded-lg shadow-lg w-96">
+                <div className="mb-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <label className="text-sm font-bold">
+                      Enter New Password To Complete Registration
+                    </label>
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="text-gray-600 dark:text-gray-300 hover:text-red-500"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M6 18L18 6M6 6l12 12"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <input
+                    type="password"
+                    id="password"
+                    value={signpassword}
+                    onChange={(e) => setsignPassword(e.target.value)}
+                    className="shadow appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                {errormsg && (
+                  <p className="text-red-500 text-sm mt-2">{errormsg}</p>
+                )}
+
+                <div className="mt-4 ">
+                  <button
+                    onClick={handlegoogleSignup}
+                    className={`w-full flex flex-col justify-beween items-center bg-white dark:bg-opacity-10  bg-opacity-20 backdrop-blur-sm border border-purple-400  font-bold py-2 px-6 rounded-lg shadow transition-all duration-300 focus:outline-none focus:shadow-outline hover:ring-2 hover:ring-purple-400`}
+                  >
+                    <span className="relative z-10">Signup</span>
+                    <span
+                      className={`rounded-md absolute inset-0 bg-gradient-to-r from-purple-400 to-purple-600 transform ${
+                        isLoading ? "scale-x-100" : "scale-x-0"
+                      } transition-transform duration-[6s] origin-left`}
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
   );
-
 };
 
 export default Login;

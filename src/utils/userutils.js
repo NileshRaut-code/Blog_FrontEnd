@@ -215,6 +215,33 @@ export const fetchData = async (navigate, slug, setPostdata) => {
   }
 };
 
+export const GoogleSignUser = async (
+  data,
+  dispatch,
+  navigate,
+  setClicked,
+  setError
+) => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_URL}/api/v1/users/google-signup`,
+      data,
+      {
+        withCredentials: true,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    dispatch(login(response.data.checkuser));
+    setClicked(false);
+    setTimeout(() => {
+      navigate("/verify");
+    }, 10);
+  } catch (err) {
+    setClicked(false);
+    setError(err.response.data?.message);
+  }
+};
+
 export const userProfile = async (username, setuserProfiledata, navigate) => {
   try {
     const postDataResult = await axios.get(
