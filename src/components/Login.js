@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Loginuser, Signupuser,GoogleLoginuser } from "../utils/userutils";
 import {GoogleLogin ,GoogleOAuthProvider } from "@react-oauth/google"
 const Login = () => {
   const dispatch = useDispatch();
+  const theme=useSelector(store=>store.user.theme)
   const navigate = useNavigate();
   const phoneno = useRef(null);
   const email = useRef(null);
@@ -45,20 +46,17 @@ const Login = () => {
       setLoading(false);
       return;
     }
-    // New Gmail validation for signup
     if (!/@gmail\.com$/.test(email.current.value)) {
       seterrmsg("Email must be a valid Gmail email.");
       setLoading(false);
       return;
     }
-    // New strong password validation
     const pwd = password.current.value;
     if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(pwd)) {
       seterrmsg("Password must be at least 8 characters long and include uppercase, lowercase, digit, and special character.");
       setLoading(false);
       return;
     }
-    // Validate phone number (allow only digits)
     const phoneNoValue = phoneno.current.value;
     if (phoneNoValue && !/^\d+$/.test(phoneNoValue)) {
       seterrmsg("Phone number should only contain digits.");
@@ -138,7 +136,8 @@ const Login = () => {
             </button>
             <div className="mt-4 ">
           <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}> <GoogleLogin
-          className="dark:text-white text-black"
+          theme={theme=="dark"?"filled_black":"outline"}
+          shape="pill"
               onSuccess={handleGoogleLoginSuccess}
               onError={() => seterrmsg("Google authentication error")}
             /></GoogleOAuthProvider> 
