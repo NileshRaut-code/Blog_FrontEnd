@@ -42,17 +42,31 @@ export const Search = () => {
     );
   }
   return (
-    <div>
-      <SearchBox />
-      <div className="flex-wrap flex-col md:flex-row text-white min-h-screen flex items-center justify-center">
-        {!allproductdata ? (
-          <Loading />
-        ) : (
-          allproductdata.map((data) => {
-            return <Postcart key={data._id} data={data} />;
-          })
-        )}
-      </div>
+    <div className="relative z-10 px-4 py-8">
+        <div className="w-full max-w-5xl mx-auto">      <SearchBox />
+
+      <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-6 flex items-center">
+              <span className="h-6 w-1.5 bg-gradient-to-b from-purple-600 to-indigo-600 rounded-full mr-3"></span>
+              <span>Search </span>
+            </h2>
+            {!allproductdata ? (
+              <div className="flex justify-center py-20">
+                <Loading />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fadeIn">
+                {allproductdata?.map((post) => (
+                  <div key={post._id} className="transform hover:-translate-y-2 transition-all duration-300">
+                    <Postcart data={post} />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+
+    </div>
     </div>
   );
 };

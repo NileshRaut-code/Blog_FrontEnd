@@ -3,48 +3,20 @@
 @tailwind utilities;
 
 @layer base {
-  h1 { @apply text-3xl font-bold text-gray-900 leading-tight ; }
-  h2 { @apply text-3xl font-semibold text-gray-900 leading-snug  ; }
-  h3 { @apply text-2xl font-semibold text-gray-800 leading-snug  ; }
-  h4 { @apply text-xl font-medium text-gray-800 leading-normal  ; }
-  h5 { @apply text-lg font-medium text-gray-700 leading-normal  ; }
-  p, span { @apply text-lg text-gray-700 leading-relaxed; }
-  
-  /* Dark mode */
-  .dark h1 { @apply text-3xl font-bold text-gray-200 leading-tight  ; }
-  .dark h2 { @apply text-3xl font-semibold text-gray-200 leading-snug  ; }
-  .dark h3 { @apply text-2xl font-semibold text-gray-300 leading-snug  ; }
-  .dark h4 { @apply text-xl font-medium text-gray-300 leading-normal  ; }
-  .dark h5 { @apply text-lg font-medium text-gray-400 leading-normal  ; }
-  .dark p, .dark span { @apply text-lg text-gray-400 leading-relaxed  ; }
-  
-  label {
-    @apply text-gray-600;
-  }
-  .dark label {
-    @apply text-gray-400;
-  }
+  h1 { @apply text-3xl text-gray-900 dark:text-gray-200; }
+  h2 { @apply text-3xl text-gray-900 dark:text-gray-200; }
+  h3 { @apply text-2xl text-gray-800 dark:text-gray-300; }
+  h4 { @apply text-xl text-gray-800 dark:text-gray-300; }
+  h5 { @apply text-xl text-gray-700 dark:text-gray-400; }
+  p, span { @apply text-sm text-gray-700 dark:text-gray-400; }
+
+  label { @apply text-gray-600 dark:text-gray-400; }
   
   pre {
-    @apply p-8 m-2 text-red-500 border dark:border-white/10 border-black/5 whitespace-pre-wrap break-words;
+    @apply p-8 m-2 border border-black/5 text-red-500 whitespace-pre-wrap break-words dark:border-white/10 dark:text-pink-500;
   }
-  .dark pre {
-    @apply p-8 m-2 text-pink-500 border whitespace-pre-wrap break-words;
-  }
-  
-  /* New additions for more UI elements */
-  li, ul, ol, select ,strong {
-    @apply text-gray-800 px-2;
-  }
-  .dark li,
-  .dark ul,
-  .dark ol,
-  .dark select,
-  .dark strong {
-    @apply text-gray-200 px-2;
+
+  li, ul, ol, select, strong {
+    @apply text-gray-800 dark:text-gray-200 px-2;
   }
 }
-
-
-
-

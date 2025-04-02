@@ -23,6 +23,7 @@ import { AdminHome } from "./components/Admin/AdminHome.js";
 import PostPub from "./components/Admin/PostPub.js";
 import Allusers from "./components/Admin/Allusers.js";
 import EditProfile from "./components/User/EditProfile.js";
+import Analytics from "./components/Admin/Analytics.js";
 const routes = createBrowserRouter([
   {
     path: "/",
@@ -103,6 +104,10 @@ const routes = createBrowserRouter([
       {
         path: "/verify",
         element: <OTP />,
+      },
+      {
+        path: "/analytics",
+        element: <Analytics />,
       },
 
 

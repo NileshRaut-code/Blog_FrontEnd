@@ -309,3 +309,22 @@ export const changedPassword =(setErrorMsg,body,setLoading)=>{
     setLoading(false)
   })
 }
+
+
+export const summaryStat =(settotalpost,settotalViews)=>{
+  axiosInstance
+  .get(`${process.env.REACT_APP_API_URL}/api/v1/users/stat-summary`, {},{
+    
+  })
+  .then((res) => {
+    const {totalViews,totalpost}=res.data.data
+    settotalViews(totalViews)
+    settotalpost(totalpost)
+  
+  }).catch((err)=>{
+    settotalViews(0)
+    settotalpost(0)
+  
+    
+    
+  })}
