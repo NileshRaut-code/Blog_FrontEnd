@@ -191,10 +191,11 @@ export default function Header() {
              
             </>
           ) : (
-            <div className="relative">
-            <button
-              onClick={() => setIsProfileOpen(!isProfileOpen)}
-              className="rounded-full px-2 font-semibold hover:ring-2 hover:ring-black/5 dark:hover:ring-white/10 transition-transform duration-200 transform hover:scale-105 "
+            <div className="flex flex-col justify-center items-center">
+            <Link
+              to={'/profile'}
+              className="rounded-full font-semibold  transition-transform duration-200 transform hover:scale-105 "
+              onClick={closeMenu}
             >
               <svg
                   className="w-8 h-8 rounded-full text-gray-700 dark:text-gray-300  transition-transform duration-200 transform hover:scale-105"
@@ -207,14 +208,21 @@ export default function Header() {
                     clipRule="evenodd"
                   />
                 </svg>
-            </button>
-  
-            {isProfileOpen && (
+            </Link>
+            <Link
+              to={'/logout'}
+              className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 w-full text-left"
+              onClick={closeMenu}
+            >
+              Logout
+            </Link>
+
+            {/* {isProfileOpen && (
               <div className="absolute bg-[#F5EFFF] dark:bg-[#030712] right-0 mt-2 w-48  rounded-md shadow-lg z-10 border border-black/5 dark:border-white/10 ">
                 <Link
                   to="/profile"
                   className="block px-4 py-2 text-gray-800 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                   onClick={closeProfileMenu}
+                   //onClick={closeProfileMenu}
                 >
                   Profile
                 </Link>
@@ -227,8 +235,9 @@ export default function Header() {
                   Logout
                 </button>
               </div>
-            )}
+            )} */}
           </div>
+          
           )}
         </div>
       )}
