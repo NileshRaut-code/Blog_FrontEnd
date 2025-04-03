@@ -62,7 +62,7 @@ const SearchBox = () => {
                      focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
           >
             <span className="flex items-center">
-              <span className="mr-2">Search</span>
+              <span className="mr-2 my-0.5">Search</span>
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>

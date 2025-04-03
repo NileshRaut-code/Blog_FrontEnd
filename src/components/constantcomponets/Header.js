@@ -37,7 +37,7 @@ export default function Header() {
   }, [profileRef]);
 
   return (
-    <nav className="sticky relative mx-8 md:mx-16 p-3 backdrop-blur-3xl flex justify-between items-center rounded-full shadow-md dark:shadow-lg fixed top-5 left-0 right-0 z-50 max-w-7xl px-6 border border-black/5 dark:border-white/10">
+    <nav className="sticky relative mx-4 p-3 md:mx-6 backdrop-blur-3xl flex justify-between items-center rounded-3xl shadow-md dark:shadow-lg fixed top-4 left-0 right-0 z-50 max-w-7xl px-6 border border-black/5 dark:border-white/10">
       <div className="flex items-center gap-2">
         <img
           src="https://nileshblog.tech/wp-content/uploads/2023/12/NileshBlog.Tech-Software-Development-Learning-Problem-Solving-Platform.svg"
