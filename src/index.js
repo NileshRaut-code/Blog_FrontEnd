@@ -103,11 +103,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/verify",
-        element: <OTP />,
+        element:  <Auth aut={true}><OTP /></Auth>,
       },
       {
         path: "/analytics",
-        element: <Analytics />,
+        element:  <Auth aut={true}><Analytics /></Auth>,
       },
 
 

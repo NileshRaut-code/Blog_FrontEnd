@@ -35,7 +35,7 @@ const App = () => {
   return loader ? (
     <div className="bg-[#F5EFFF] dark:bg-[#030712] min-h-[100vh]">
       <Header />
-      <div className="mt-10"><Outlet /></div>
+      <div className="mt-1 md:mt-10 "><Outlet /></div>
       <Footer />
     </div>
   ) : (
