@@ -54,8 +54,7 @@ const Home = () => {
 
   const handleFilter = (filter) => {
     setActiveFilter(filter);
-    // In a real implementation, you would filter posts by category/tag
-    // For now, we'll just show all posts regardless of filter
+    
   };
 
   const handleSubscribe = (e) => {
@@ -65,11 +64,9 @@ const Home = () => {
       return;
     }
     
-    // Simulate API call
     setTimeout(() => {
       setSubscribeStatus({ success: true, message: "Thanks for subscribing! Check your email for confirmation." });
       setEmail("");
-      // Reset status after 5 seconds
       setTimeout(() => setSubscribeStatus(null), 5000);
     }, 1000);
   };
