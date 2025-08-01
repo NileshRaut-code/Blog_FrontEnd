@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, ScrollRestoration, useNavigate } from "react-router-dom";
 import Header from "./components/constantcomponets/Header.js";
 import Footer from "./components/constantcomponets/Footer.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,6 +34,7 @@ const App = () => {
 
   return loader ? (
     <div className="bg-[#F5EFFF] dark:bg-[#030712] min-h-[100vh]">
+      <ScrollRestoration/>
       <Header />
       <div className="mt-2 md:mt-10 "><Outlet /></div>
       <Footer />
